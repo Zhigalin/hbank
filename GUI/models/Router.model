@@ -14,7 +14,7 @@ class Router {
 			}
 		} else {
 			$controller_name = $params['controller']; 
-			$action_name = $params['action'];
+			@$action_name = $params['action'];
 		}
 		
 		#get the controller and format it correctly so the first
