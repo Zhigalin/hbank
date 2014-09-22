@@ -1,0 +1,4 @@
+### Main htaccess file rev 2.0 ###
+
+#No problems with encoding
+AddDefaultCharset UTF-8

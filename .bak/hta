@@ -1,0 +1,6 @@
+
+#We have no need to access anything but front controller because all the relationship with the core is done by the latter
+#So let's humanize our URLs 
+RewriteEngine off
+RewriteRule ^(.*) ./?%{QUERY_STRING}
+RewriteRule ^controller/?([^/]+)/?action/?([^/]+)/?parameters/?([^/]+)$ front_controller.php?controller=$1 [L]

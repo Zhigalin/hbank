@@ -1,0 +1,30 @@
+################################################################################
+###             Time Managmets software core for Time Banks                  ###
+###                                                                          ###
+###                     © Zhigalin Alexander 2014                            ###
+################################################################################
+
+&&&&& System requrements &&&&&
+You must have a server that support htaccess files and mod_rewrite, a MySQL database, and 
+a PHP interpreter ver 5 or older. php_curl, php_json extentions must be installed.
+A LAMP (Linux, Apache, Mysql, Php) server will be a good solution. 
+
+&&&&& Install &&&&&
+Copy the core folder into your server, then set up the database second 
+the scheme in /.readme/database_setup.html. Now insert your db credentials
+into /includes/sql.php 
+
+&&&&& Use &&&&&
+This is an API-centric web application.
+All the requests are handled with the Front Controller (/front_controller.php file)
+You must send your requests to the 
+http://{domain}/{path_to_core_folder}/API/?{encrypted_reqest_params}
+Yes, there is no folder called API, the core process your requests using the Rewrite Engine
+so you mustn't worry about that.
+Look at /.readme/api_caller.example for more information.
+
+&&&&& Licensing &&&&&
+This software is distributed under GNU AGPL.
+You can find this license in /.readme/about.license
+You must accept this license in order to modify or distribute this program,
+you may not accept it in order to copy or use this program.

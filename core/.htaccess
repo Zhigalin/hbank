@@ -1,0 +1,9 @@
+### Main htaccess file rev 1.2 ###
+
+#No problems with encoding
+AddDefaultCharset UTF-8
+
+#We have no need to access anything but front controller because all the relationship with the core is done by the latter
+#So let's humanize our URLs 
+RewriteEngine on
+RewriteRule ^API/?$ front_controller.php?%{QUERY_STRING}

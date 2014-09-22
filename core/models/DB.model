@@ -1,0 +1,44 @@
+<?php
+
+class DB {
+	static $connection;
+	
+	static function init() {
+		global $_SETTINGS;
+		
+		$host     = $_SETTINGS['database']['host'];
+		$dbname   = $_SETTINGS['database']['name'];
+		$user     = $_SETTINGS['database']['user'];
+		$pass     = $_SETTINGS['database']['pass'];
+		
+		self::$connection = new PDO('mysql:host='.$host.';dbname='.$dbname, $user, $pass, array(PDO::ATTR_PERSISTENT => true));
+		self::$connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+		self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	}
+	
+	static function execPrep($query, $prep) {
+		$PDOStatementObject = self::$connection->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+		if ($PDOStatementObject->execute($prep)===true) {
+			return $PDOStatementObject->fetchAll(PDO::FETCH_ASSOC);
+		} else {
+			return false;
+		}
+	}
+	static function exec($query) {
+		$PDOStatementObject = self::$connection->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+		if ($PDOStatementObject->execute()===true) {
+			return $PDOStatementObject->fetchAll(PDO::FETCH_ASSOC);
+		} else {
+			return false;
+		}
+	}
+	
+	static function insert($query) {
+		self::$connection->beginTransaction(); 
+		self::$connection->exec("SET CHARACTER SET utf8");
+		self::$connection->exec($query);
+		return self::$connection->commit();
+	}
+}
+
+?>
