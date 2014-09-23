@@ -1,6 +1,4 @@
 - Current global task: create a MWP
-- Task: create DB
-	- Subtask: code all the DB-related functions
-- Task: code the depositor controller, list action and create action
+- Task: code the depositor controller, list action, update action and get action
 - Task: code the transactions controller, list action, read action and create action
-- Task: code the installation page
+- Minor task: code the installation page
