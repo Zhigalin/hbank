@@ -132,16 +132,16 @@ class DepositorController extends AbstractController {
 			}  catch( Exception $e ) {
 				$error = $e->getMessage();
 				$str = View::render('insert_depositor/unknown_failure', $this->params, true);
-				
+				$log = fopen($this->params['error_log_file_path'], 'a+');
+				fwrite($log, $error);
+				fclose($log);
 				$this->render($str);
 			} 
 			$this->params['page_title'] = $this->params['insert_a_depositor_text'];
 			$str = View::render('insert_depositor/success', $this->params, true);
 			$this->render($str);
-			#var_dump($data);#                     DEBUG
 		} else {
-			#print_r($this->params);#                    DEBUG
-			$str = View::render('insert_depositor/blank_field', $this->params, true);
+			$str = View::render('insert_depositor/blank', $this->params, true);
 			$this->render($str);
 		}
 	}

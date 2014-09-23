@@ -74,11 +74,11 @@ $_LANG['wrong_mail_text']                                               = 'Email
 $_LANG['wrong_password_text']                                           = 'Password sbagliato!';
 $_LANG['click_to_return_text']                                          = 'Clicca per tornare';
 $_LANG['exit_text']                                                     = 'Esci';
-$_LANG['internet_text']                                                 = 'Internet';
-$_LANG['internet_text']                                                 = 'Internet';
-$_LANG['internet_text']                                                 = 'Internet';
-$_LANG['internet_text']                                                 = 'Internet';
-$_LANG['internet_text']                                                 = 'Internet';
+$_LANG['blank_field_text']                                              = 'Uno dei campi obligatorii non è stato compilato!';
+$_LANG['insert_another_depo_text']                                      = 'Inseriscine un altro';
+$_LANG['return_text']                                                   = 'Ritorna';
+$_LANG['unknown_registred_error_text_text']                             = 'Si è verificato un errore non riconosciuto. I detagli dell errore sono stati salvati nel apposito registro';
+$_LANG['contact_the_maintainer_text']                                   = 'Contatta l\'amministratore';
 $_LANG['internet_text']                                                 = 'Internet';
 $_LANG['internet_text']                                                 = 'Internet';
 

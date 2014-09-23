@@ -6,5 +6,7 @@ $_ENV['main_stylesheet']      = 'http://'.$_SETTINGS['site']['domain'].$_SETTING
 $_ENV['main_js']              = 'http://'.$_SETTINGS['site']['domain'].$_SETTINGS['site']['folder'].'template/javascript/main.js';
 $_ENV['bootstrap_js']         = 'http://'.$_SETTINGS['site']['domain'].$_SETTINGS['site']['folder'].'template/javascript/bootstrap.min.js';
 $_ENV['application_url']      = 'http://'.$_SETTINGS['site']['domain'].$_SETTINGS['site']['folder'];
+$_ENV['error_log_file_path']  = 'sys/errors.log';
+$_ENV['notice_log_file_path'] = 'sys/notice.log';
 
 ?>
