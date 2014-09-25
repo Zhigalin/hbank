@@ -12,37 +12,37 @@ class DepositorController extends AbstractController {
 		$str = $str.View::render('depositors_table/table_header', $this->params, true);
 		$str = $str.View::render('depositors_table/nodata', $this->params, true);
 		
-		$api_params = 'controller=depositor&action=list';
+		$api_params 
+			=
+			@array (
+				'controller'     => 'depositor',
+				'action'         => 'list',
+				'sortby'         => $this->params['sortby'],
+				'sortorder'      => $this->params['sortorder'],
+				'state'          => $this->params['state'],
+				'page'           => $this->params['page'],
+				'perpage'        => $this->params['perpage'],
+				'search'         => $this->params['search'],
+				'searchfor'      => $this->params['searchfor'],
+				'seachtext'      => $this->params['seachtext']
+			)
+		;
 		
-		if (!empty($this->params['page'])) {
-			$api_params = $api_params.'&page='.$this->params['page'];
-		}
-		if (!empty($this->params['perpage'])) {
-			$api_params = $api_params.'&perpage='.$this->params['perpage'];
-		}
-		if (!empty($this->params['sortby'])) {
-			$api_params = $api_params.'&sortby='.$this->params['sortby'];
-		}
-		if (!empty($this->params['sortorder'])) {
-			$api_params = $api_params.'&sortorder='.$this->params['sortorder'];
-		}
-		if (!empty($this->params['searchfor'])) {
-			switch ($this->params['searchfor']) {
-				case 'depnum':
-					$api_params = $api_params.'&depnum='.$this->params['search_query'];
-				break;
-				case 'name':
-					$api_params = $api_params.'&name='.$this->params['search_query'];
-				break;
-				case 'surname':
-					$api_params = $api_params.'&surname='.$this->params['search_query'];
-				break;
-			}
-		}
 		try { 
 			$data = $this->_API->sendRequest($api_params); 
-		}  catch( Exception $e ) {
-			echo $e->getMessage(); #catch any exceptions and report the problem
+		} catch( Exception $e ) { 
+			#catch any exceptions and report the problem
+			$error = 'Error occurred. Time:'.date('x');#--------------------------------------------------------FINISH----------------
+			$error = $error.' Error point: depo:list. Error data: ';
+			$error = $error.$e->getMessage(); 
+			$error = $error.' Trace($data): ';
+			$error = $error.var_dump($data);
+			$error = $error.' Trace($e errot object): ';
+			$error = $error.var_dump($e);
+			$error = $error.' ~!@#$%^&*()_+ \n';
+			$log = fopen($this->params['error_log_file_path'], 'a+t');#-----------------------------------------CONTROL----------------
+			fwrite($log, $error);
+			fclose($log);
 		}
 		
 		$str = $str.View::render('depositors_table/table_footer', $this->params, true);
@@ -98,44 +98,51 @@ class DepositorController extends AbstractController {
 			 ) {
 			
 			$api_params 
-			=
-			@array (
-				'controller'     => 'depositor',
-				'action'         => 'create',
-				'name'           => $this->params['name'],
-				'surname'        => $this->params['surname'],
-				'birth_place'    => $this->params['birth_place'],
-				'birth_date'     => $this->params['birth_date'],
-				'sex'            => $this->params['sex'],
-				'street'         => $this->params['street'],
-				'civic'          => $this->params['civic'],
-				'city'           => $this->params['city'],
-				'index'          => $this->params['index'],
-				'email'          => $this->params['email'],
-				'mobile'         => $this->params['mobile'],
-				'telephone'      => $this->params['telephone'],
-				'document'       => $this->params['document'],
-				'document_type'  => $this->params['document_type'],
-				'profession'     => $this->params['profession'],
-				'degree'         => $this->params['degree'],
-				'info_from'      => $this->params['info_from'],
-				'associations'   => $this->params['associations'],
-				'state'          => $this->params['state'],
-				'available'      => $this->params['available'],
-				'hours'          => $this->params['hours'],
-				'notes'          => $this->params['notes']
-			);
+				=
+				@array (
+					'controller'     => 'depositor',
+					'action'         => 'create',
+					'name'           => $this->params['name'],
+					'surname'        => $this->params['surname'],
+					'birth_place'    => $this->params['birth_place'],
+					'birth_date'     => $this->params['birth_date'],
+					'sex'            => $this->params['sex'],
+					'street'         => $this->params['street'],
+					'civic'          => $this->params['civic'],
+					'city'           => $this->params['city'],
+					'index'          => $this->params['index'],
+					'email'          => $this->params['email'],
+					'mobile'         => $this->params['mobile'],
+					'telephone'      => $this->params['telephone'],
+					'document'       => $this->params['document'],
+					'document_type'  => $this->params['document_type'],
+					'profession'     => $this->params['profession'],
+					'degree'         => $this->params['degree'],
+					'info_from'      => $this->params['info_from'],
+					'associations'   => $this->params['associations'],
+					'state'          => $this->params['state'],
+					'available'      => $this->params['available'],
+					'hours'          => $this->params['hours'],
+					'notes'          => $this->params['notes']
+				)
+			;
 			
 			
 			try { 
 				$data = $this->_API->sendRequest($api_params); 
-			}  catch( Exception $e ) {
-				$error = $e->getMessage();
-				$str = View::render('insert_depositor/unknown_failure', $this->params, true);
-				$log = fopen($this->params['error_log_file_path'], 'a+');
+			} catch( Exception $e ) {
+				#catch any exceptions and report the problem
+				$error = 'Error occurred. Time:'.date('x');#--------------------------------------------------------FINISH----------------
+				$error = $error.' Error point: depo:list. Error data: ';
+				$error = $error.$e->getMessage(); 
+				$error = $error.' Trace($data): ';
+				$error = $error.var_dump($data);
+				$error = $error.' Trace($e errot object): ';
+				$error = $error.var_dump($e);
+				$error = $error.' ~!@#$%^&*()_+ \n';
+				$log = fopen($this->params['error_log_file_path'], 'a+t');#-----------------------------------------CONTROL----------------
 				fwrite($log, $error);
 				fclose($log);
-				$this->render($str);
 			} 
 			$this->params['page_title'] = $this->params['insert_a_depositor_text'];
 			$str = View::render('insert_depositor/success', $this->params, true);
