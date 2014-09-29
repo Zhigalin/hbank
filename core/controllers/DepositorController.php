@@ -47,16 +47,16 @@ class DepositorController {
 		}
 		
 		$query = "INSERT INTO `depositors` (`name`, `surname`, `mobile`, `telephone`, `email`, `state`, `hours no.`) ";
-		$query .= "VALUES (':name, :surname, :mobile, :telephone, :email, :state, :hours)";
+		$query .= "VALUES (':name, :surname, :mobile, :telephone, :email, IFNULL(:state, DEFAULT(state)), IFNULL(:hours, DEFAULT(hours)))";
 		$values = 
 			array(
-				':name'=>$this->_params['name'],
-				':surname'=>$this->_params['surname'],
-				':mobile'=>$this->_params['mobile'],
-				':telephone'=>$this->_params['telephone'],
-				':email'=>$this->_params['email'],
-				':state'=>$this->_params['state'] === 'unactive' ? 'unactive' : 'DEFAULT(state)',
-				':hours'=>$this->_params['hours'] ? $this->_params['hours'] : 'DEFAULT(hours)'
+				':name'        =>   $this->_params['name'],
+				':surname'     =>   $this->_params['surname'],
+				':mobile'      =>   $this->_params['mobile'],
+				':telephone'   =>   $this->_params['telephone'],
+				':email'       =>   $this->_params['email'],
+				':state'       =>   $this->_params['state'] === 'unactive' ? 'unactive' : 'null',
+				':hours'       =>   $this->_params['hours'] ? $this->_params['hours'] : 'null'
 			)
 		;
 
