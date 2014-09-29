@@ -5,7 +5,7 @@
 class BankController {
 	private $params;
 
-	public function __construct($params); {
+	public function __construct($params) {
 		$this->params = $params;
 	}
 	
