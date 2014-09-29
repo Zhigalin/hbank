@@ -39,7 +39,8 @@ class DB {
 		$query .= $condition ? $table.'` WHERE '.$condition : $table.'`';
 		$PDOStatementObject = self::$connection->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		if ($PDOStatementObject->execute()===true) {
-			return $PDOStatementObject->fetchAll(PDO::FETCH_NUM)[0];
+			$temp = $PDOStatementObject->fetchAll(PDO::FETCH_NUM); #to ensure backward compatibility with PHP < 5.4
+			return $temp[0];
 		} else {
 			return false;
 		}

@@ -133,17 +133,17 @@ class DepositorController extends AbstractController {
 				$data = $this->_API->sendRequest($api_params); 
 			} catch( Exception $e ) {
 				#catch any exceptions and report the problem
-				$error = 'Error occurred. Time:'.date('d.m.Y H:i:s');
-				$error = $error.' Error point: depo:insert. Error data: ';
-				$error = $error.$e->getMessage();
-				$error = $error.' Trace($data): ';
-				$error = $error.var_dump($data);
-				$error = $error.' Trace($e errot object): ';
-				$error = $error.var_dump($e);
-				$error = $error.' ========== '."\n";
-				$log = fopen($this->params['error_log_file_path'], 'a+');
-				fwrite($log, $error);
-				fclose($log);
+				@$error = 'Error occurred. Time:'.date('d.m.Y H:i:s');
+				@$error = $error.' Error point: depo:insert. Error data: ';
+				@$error = $error.$e->getMessage();
+				@$error = $error.' Trace($data): ';
+				@$error = $error.var_dump($data);
+				@$error = $error.' Trace($e errot object): ';
+				@$error = $error.var_dump($e);
+				@$error = $error.' ========== '."\n";
+				@$log = fopen($this->params['error_log_file_path'], 'a+');
+				@fwrite($log, $error);
+				@fclose($log);
 			} 
 			$this->params['page_title'] = $this->params['insert_a_depositor_text'];
 			$str = View::render('insert_depositor/success', $this->params, true);
