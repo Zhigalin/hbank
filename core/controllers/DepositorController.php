@@ -97,7 +97,8 @@ class DepositorController {
 		} else {
 			$from = ( $this->_params['page'] * $this->_params['perpage'] ) - $this->_params['perpage'];
 			$query = 'SELECT * FROM depositors ORDER BY `'.$this->_params['sortby'].'` '.$this->_params['sortorder'].' LIMIT '.$from.', '.$this->_params['perpage'];
-			$data['pages'] = DB::count('depositors') / $this->_params['perpage'];
+			$data['pages'] = DB::count('depositors');
+			$data['pages'] /= $this->_params['perpage'];
 			$data['page'] = $this->_params['page'];
 			if ($result = DB::exec($query)) {
 				$data['success'] = true;
