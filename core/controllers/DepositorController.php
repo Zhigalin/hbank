@@ -8,6 +8,13 @@ class DepositorController {
 	public function __construct($params)
 	{
 		$this->_params = $params;
+
+		try {
+			DB::init();
+		} catch( Exception $e ) {
+			$data['success'] = false;
+			$data['errormsg'] = 'DB connection fault: '.$e->getMessage();
+		}
 	}
 	
 	public function createAction() {
@@ -39,15 +46,9 @@ class DepositorController {
 		#                                                                            #
 		#     *: depends of the bank settings, however the standart is 5 hours PP    #
 		##############################################################################
-		try {
-			DB::init();
-		} catch( Exception $e ) {
-			$data['success'] = false;
-			$data['errormsg'] = 'DB connection fault: '.$e->getMessage();
-		}
 		
 		$query = "INSERT INTO `depositors` (`name`, `surname`, `mobile`, `telephone`, `email`, `state`, `hours no.`) ";
-		$query .= "VALUES (':name, :surname, :mobile, :telephone, :email, IFNULL(:state, DEFAULT(state)), IFNULL(:hours, DEFAULT(hours)))";
+		$query .= "VALUES (:name, :surname, :mobile, :telephone, :email, IFNULL(:state, DEFAULT(state)), IFNULL(:hours, DEFAULT(hours)))";
 		$values = 
 			array(
 				':name'        =>   $this->_params['name'],
@@ -71,13 +72,6 @@ class DepositorController {
 	
 	public function listAction() {
 		$data = array();
-
-		try {
-			DB::init();
-		} catch( Exception $e ) {
-			$data['success'] = false;
-			$data['errormsg'] = 'DB connection fault: '.$e->getMessage();
-		}
 
 		if (empty($this->_params['page'])) {
 			$this->_params['page'] = 1;
@@ -115,12 +109,6 @@ class DepositorController {
 	public function getlastnumAction() {
 		$data = array();
 
-		try {
-			DB::init();
-		} catch( Exception $e ) {
-			$data['success'] = false;
-			$data['errormsg'] = 'DB connection fault: '.$e->getMessage();
-		}
 		$query = 'SELECT `depositor no.` FROM depositors ORDER BY `depositor no.` DESC LIMIT 1';
 		if ($data = DB::exec($query)) {
 			$data['result'] = $data[0];
