@@ -8,8 +8,8 @@ class DepositorController extends AbstractController {
 	public function listAction() {
 		$this->params['page_title'] = $this->params['members_list_text'];
 		
-		$str = View::render('depositors_table/sort', $this->params, true);
-		$str = $str.View::render('depositors_table/table_header', $this->params, true);
+		#$str = View::render('depositors_table/sort', $this->params, true);
+		#$str = $str.View::render('depositors_table/table_header', $this->params, true);
 		//$str = $str.View::render('depositors_table/nodata', $this->params, true); #dummy template
 		
 		$api_params 
@@ -32,24 +32,24 @@ class DepositorController extends AbstractController {
 			$data = $this->_API->sendRequest($api_params);
 		} catch( Exception $e ) {
 			#catch any exceptions and report the problem
-			$error = 'Error occurred. Time:'.date('d.m.Y H:i:s');
-			$error = $error.' Error point: depo:list. Error data: ';
-			$error = $error.$e->getMessage();
-			$error = $error.' Trace($data): ';
-			$error = $error.var_dump($data);
-			$error = $error.' Trace($e errot object): ';
-			$error = $error.var_dump($e);
-			$error = $error.' ========== '."\n";
-			$log = fopen($this->params['error_log_file_path'], 'a+');
-			fwrite($log, $error);
-			fclose($log);
+			@$error = 'Error occurred. Time:'.date('d.m.Y H:i:s');
+			@$error = $error.' Error point: depo:list. Error data: ';
+			@$error = $error.$e->getMessage();
+			@$error = $error.' Trace($data): ';
+			@$error = $error.var_dump($data);
+			@$error = $error.' Trace($e errot object): ';
+			@$error = $error.var_dump($e);
+			@$error = $error.' ========== '."\n";
+			@$log = fopen($this->params['error_log_file_path'], 'a+');
+			@fwrite($log, $error);
+			@fclose($log);
 		}
 		print_r($data);
 		
 		#$str = $str.View::render('depositors_table/table_footer', $this->params, true);
 		#$str = $str.View::render('depositors_table/pagination', $this->params, true);
 		
-		$this->render($str);
+		#$this->render($str);
 	}
 	
 	public function createAction() {
