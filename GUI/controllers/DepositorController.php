@@ -128,6 +128,7 @@ class DepositorController extends AbstractController {
 				)
 			;
 			
+			var_dump($api_params);
 			
 			try { 
 				$data = $this->_API->sendRequest($api_params); 
