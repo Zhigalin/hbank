@@ -54,7 +54,7 @@ class ApiCaller {
 		}
 		
 		#if everything went great, return the data
-		return $result['data'];
+		return $result;
 	}
 }
 ?>
