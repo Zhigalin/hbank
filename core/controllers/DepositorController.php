@@ -14,8 +14,8 @@ class DepositorController {
 		##############################################################################
 		#                               Fields:                                      #
 		#                                                                            #
-		#   █name               (string)                          required█         #
-		#   █surname            (string)                          required█         #
+		#    name               (string)                          required           #
+		#    surname            (string)                          required           #
 		#    birth_place        (string)                          required           #
 		#    birth_date         (date)                            required           #
 		#    sex                (m/f)                             required           #
@@ -23,9 +23,9 @@ class DepositorController {
 		#    civic              (string)                                             #
 		#    city               (string)                          required           #
 		#    index              (number)                          required           #
-		#   █email              (*@*)(string)                     required█         #
-		#   █mobile             (telephone)                       required█         #
-		#   █telephone          (telephone)                               █         #
+		#    email              (*@*)(string)                     required           #
+		#    mobile             (telephone)                       required           #
+		#    telephone          (telephone)                                          #
 		#    document           (string)                          required           #
 		#    document_type      (id/drivers_license/passport)     required           #
 		#    profession         (string)                                             #
@@ -33,9 +33,9 @@ class DepositorController {
 		#    info_from          (leaflet/internet/word_of_mouth/demonstration)       #
 		#    associations       (string)                                             #
 		#    available          (boolean)                         required           #
-		#  █hours              (number)                          default 5*█        #
+		#    hours              (number)                          default 5*         #
 		#    notes              (string)                                             #
-		#  █state              (active/unactive)                 required█          #
+		#    state              (active/unactive)                 required           #
 		#                                                                            #
 		#     *: depends of the bank settings, however the standart is 5 hours PP    #
 		##############################################################################
@@ -45,17 +45,22 @@ class DepositorController {
 			$data['success'] = false;
 			$data['errormsg'] = 'DB connection fault: '.$e->getMessage();
 		}
-		$values = array();
-		$query = 'INSERT INTO `depositors` (`name`, `surname`, `mobile`, `telephone`, `email`';
-		$query = $this->_params['state'] === 'active' ? $query : $query.', `state`';
-		$query = !empty($this->_params['hours']) ? $query.', `hours no.`' :  $query;
-		$query = $query.') ';
-		$query = $query."VALUES ('".$this->_params['name']."', '".$this->_params['surname']."', '".$this->_params['mobile']."', '".$this->_params['telephone']."', '".$this->_params['email']."'";
-		$query = $this->_params['state'] === 'active' ? $query : $query.", '".$this->_params['state']."'";
-		$query = !empty($this->_params['hours']) ? $query.', '.$this->_params['hours'] :  $query;
-		$query = $query.')';
 		
- 		if(DB::insert($query) === true) {
+		$query = "INSERT INTO `depositors` (`name`, `surname`, `mobile`, `telephone`, `email`, `state`, `hours no.`) ";
+		$query .= "VALUES (':name, :surname, :mobile, :telephone, :email, :state, :hours)";
+		$values = 
+			array(
+				':name'=>$this->_params['name'],
+				':surname'=>$this->_params['surname'],
+				':mobile'=>$this->_params['mobile'],
+				':telephone'=>$this->_params['telephone'],
+				':email'=>$this->_params['email'],
+				':state'=>$this->_params['state'] === 'unactive' ? 'unactive' : 'DEFAULT(state)',
+				':hours'=>$this->_params['hours'] ? $this->_params['hours'] : 'DEFAULT(hours)';
+			)
+		;
+
+ 		if(DB::insert($query, $values) === true) {
 			$data['success'] = true;
 		} else {
 			$data['success'] = false;
@@ -65,13 +70,15 @@ class DepositorController {
 	}
 	
 	public function listAction() {
+		$data = array();
+
 		try {
 			DB::init();
 		} catch( Exception $e ) {
 			$data['success'] = false;
 			$data['errormsg'] = 'DB connection fault: '.$e->getMessage();
 		}
-		
+
 		if (empty($this->_params['page'])) {
 			$this->_params['page'] = 1;
 		}
@@ -79,23 +86,34 @@ class DepositorController {
 			$this->_params['perpage'] = 20;
 		}
 		if (empty($this->_params['sortby'])) {
-			$this->_params['sortby'] = 'depnum';
+			$this->_params['sortby'] = 'depositor no.';
 		}
 		if (empty($this->_params['sortorder'])) {
-			$this->_params['sortorder'] = 'ascending';
+			$this->_params['sortorder'] = 'DESC';
 		}
-		
-		if ($data = DB::exec($query, $this->_params)) {
-			return $data;
+
+		if (!empty($this->_params['search'])) {
+			#TODO
 		} else {
-			$data = array();
-			$data['success'] = false;
-			$data['errormsg'] = 'DB fault';
-			return $data;
+			$from = ( $this->_params['page'] * $this->_params['perpage'] ) - $this->_params['perpage'];
+			$query = 'SELECT * FROM depositors ORDER BY `'.$this->_params['sortby'].'` '.$this->_params['sortorder'].' LIMIT '.$from.', '.$this->_params['perpage'];
+			$data['pages'] = DB::count('depositors') / $this->_params['perpage'];
+			$data['page'] = $this->_params['page'];
+			if ($result = DB::exec($query)) {
+				$data['success'] = true;
+				$data['result'] = $result;
+				return $data;
+			} else {
+				$data['success'] = false;
+				$data['errormsg'] = 'DB fault';
+				return $data;
+			}
 		}
 	}
 	
 	public function getlastnumAction() {
+		$data = array();
+
 		try {
 			DB::init();
 		} catch( Exception $e ) {
@@ -104,11 +122,10 @@ class DepositorController {
 		}
 		$query = 'SELECT `depositor no.` FROM depositors ORDER BY `depositor no.` DESC LIMIT 1';
 		if ($data = DB::exec($query)) {
-			$data = $data[0];
+			$data['result'] = $data[0];
 			$data['success'] = true;
 			return $data;
 		} else {
-			$data = array();
 			$data['success'] = false;
 			$data['errormsg'] = 'DB fault';
 			return $data;

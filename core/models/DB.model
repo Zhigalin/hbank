@@ -24,6 +24,7 @@ class DB {
 			return false;
 		}
 	}
+
 	static function exec($query) {
 		$PDOStatementObject = self::$connection->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		if ($PDOStatementObject->execute()===true) {
@@ -32,12 +33,22 @@ class DB {
 			return false;
 		}
 	}
+
+	static function count($table, $condition = false) {
+		$query = 'SELECT COUNT(*) FROM `'
+		$query .= $condition ? $table.'` WHERE '.$condition : $table.'`';
+		$PDOStatementObject = self::$connection->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+		if ($PDOStatementObject->execute()===true) {
+			return $PDOStatementObject->fetchAll(PDO::FETCH_NUM)[0];
+		} else {
+			return false;
+		}
+	}
+
 	
-	static function insert($query) {
-		self::$connection->beginTransaction(); 
-		self::$connection->exec("SET CHARACTER SET utf8");
-		self::$connection->exec($query);
-		return self::$connection->commit();
+	static function insert($query, $prep) {
+		$PDOStatementObject = self::$connection->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+		return $PDOStatementObject->execute($prep);
 	}
 }
 

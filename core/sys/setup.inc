@@ -6,6 +6,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require 'sys/autoload.php';
+require 'controllers/BankController.php';
 
 spl_autoload_register('__autoload');
 

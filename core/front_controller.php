@@ -3,8 +3,7 @@
 ###########################################################
 ### Front controller file rev 1.2                       ###
 ### Implements routing to needed controller,            ###
-###  works second the MVC scheme,                       ###
-###   supports the CRUD action scheme                   ###
+###  works second the MVC scheme.                       ###
 ###########################################################
 
 require 'sys/setup.inc';
@@ -61,12 +60,11 @@ try {
  
    #execute the action
 	$data = $controller->$action();
-	$result = array();
-	$result['success'] = $data['success'];
-   $result['data'] = $data;
+	$result = $data;
 	
 } catch( Exception $e ) {
    #catch any exceptions and report the problem
+   $result = array();
    $result['success'] = false;
    $result['errormsg'] = $e->getMessage();
 }

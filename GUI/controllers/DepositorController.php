@@ -10,7 +10,7 @@ class DepositorController extends AbstractController {
 		
 		$str = View::render('depositors_table/sort', $this->params, true);
 		$str = $str.View::render('depositors_table/table_header', $this->params, true);
-		$str = $str.View::render('depositors_table/nodata', $this->params, true);
+		//$str = $str.View::render('depositors_table/nodata', $this->params, true); #dummy template
 		
 		$api_params 
 			=
@@ -28,25 +28,26 @@ class DepositorController extends AbstractController {
 			)
 		;
 		
-		try { 
-			$data = $this->_API->sendRequest($api_params); 
-		} catch( Exception $e ) { 
+		try {
+			$data = $this->_API->sendRequest($api_params);
+		} catch( Exception $e ) {
 			#catch any exceptions and report the problem
-			$error = 'Error occurred. Time:'.date('x');#--------------------------------------------------------FINISH----------------
+			$error = 'Error occurred. Time:'.date('d.m.Y H:i:s');
 			$error = $error.' Error point: depo:list. Error data: ';
-			$error = $error.$e->getMessage(); 
+			$error = $error.$e->getMessage();
 			$error = $error.' Trace($data): ';
 			$error = $error.var_dump($data);
 			$error = $error.' Trace($e errot object): ';
 			$error = $error.var_dump($e);
-			$error = $error.' ~!@#$%^&*()_+ \n';
-			$log = fopen($this->params['error_log_file_path'], 'a+t');#-----------------------------------------CONTROL----------------
+			$error = $error.' ========== '."\n";
+			$log = fopen($this->params['error_log_file_path'], 'a+');
 			fwrite($log, $error);
 			fclose($log);
 		}
+		print_r($data);
 		
-		$str = $str.View::render('depositors_table/table_footer', $this->params, true);
-		$str = $str.View::render('depositors_table/pagination', $this->params, true);
+		#$str = $str.View::render('depositors_table/table_footer', $this->params, true);
+		#$str = $str.View::render('depositors_table/pagination', $this->params, true);
 		
 		$this->render($str);
 	}
@@ -62,7 +63,7 @@ class DepositorController extends AbstractController {
 			echo $e->getMessage(); #catch any exceptions and report the problem
 		}
 		
-		$this->params['next_depositor_num'] = $data['depositor no.']+1;
+		$this->params['next_depositor_num'] = $data['result']['depositor no.']+1;
 		
 		$api_params = array ('controller' => 'bank', 'action' => 'getinithours');
 		
@@ -132,15 +133,15 @@ class DepositorController extends AbstractController {
 				$data = $this->_API->sendRequest($api_params); 
 			} catch( Exception $e ) {
 				#catch any exceptions and report the problem
-				$error = 'Error occurred. Time:'.date('x');#--------------------------------------------------------FINISH----------------
-				$error = $error.' Error point: depo:list. Error data: ';
-				$error = $error.$e->getMessage(); 
+				$error = 'Error occurred. Time:'.date('d.m.Y H:i:s');
+				$error = $error.' Error point: depo:insert. Error data: ';
+				$error = $error.$e->getMessage();
 				$error = $error.' Trace($data): ';
 				$error = $error.var_dump($data);
 				$error = $error.' Trace($e errot object): ';
 				$error = $error.var_dump($e);
-				$error = $error.' ~!@#$%^&*()_+ \n';
-				$log = fopen($this->params['error_log_file_path'], 'a+t');#-----------------------------------------CONTROL----------------
+				$error = $error.' ========== '."\n";
+				$log = fopen($this->params['error_log_file_path'], 'a+');
 				fwrite($log, $error);
 				fclose($log);
 			} 
