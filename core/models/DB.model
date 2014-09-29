@@ -40,7 +40,7 @@ class DB {
 		$PDOStatementObject = self::$connection->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		if ($PDOStatementObject->execute()===true) {
 			$temp = $PDOStatementObject->fetchAll(PDO::FETCH_NUM); #to ensure backward compatibility with PHP < 5.4
-			return $temp[0];
+			return $temp[0][0];
 		} else {
 			return false;
 		}
