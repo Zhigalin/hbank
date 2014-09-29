@@ -63,7 +63,7 @@ class DepositorController extends AbstractController {
 			echo $e->getMessage(); #catch any exceptions and report the problem
 		}
 		
-		$this->params['next_depositor_num'] = $data['result']['depositor no.'];
+		$this->params['next_depositor_num'] = $data['result']['depositor no.']+1;
 		
 		$api_params = array ('controller' => 'bank', 'action' => 'getinithours');
 		
