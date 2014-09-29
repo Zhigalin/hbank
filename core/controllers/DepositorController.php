@@ -56,7 +56,7 @@ class DepositorController {
 				':telephone'=>$this->_params['telephone'],
 				':email'=>$this->_params['email'],
 				':state'=>$this->_params['state'] === 'unactive' ? 'unactive' : 'DEFAULT(state)',
-				':hours'=>$this->_params['hours'] ? $this->_params['hours'] : 'DEFAULT(hours)';
+				':hours'=>$this->_params['hours'] ? $this->_params['hours'] : 'DEFAULT(hours)'
 			)
 		;
 
