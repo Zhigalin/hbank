@@ -38,7 +38,7 @@ class ApiCaller {
 		
 		#execute the request
 		$result = curl_exec($ch);
-		var_dump($result);#                      DEBUG
+		#var_dump($result);#                      DEBUG
 		#json_decode the result
 		$result = json_decode($result, true);
 		print_r($result);#                       DEBUG
