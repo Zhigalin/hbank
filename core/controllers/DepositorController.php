@@ -48,7 +48,7 @@ class DepositorController {
 		##############################################################################
 		
 		$query = "INSERT INTO `depositors` (`name`, `surname`, `mobile`, `telephone`, `email`, `state`, `hours no.`) ";
-		$query .= "VALUES (:name, :surname, :mobile, :telephone, :email, IFNULL(:state, DEFAULT(state)), IFNULL(:`hours no.`, DEFAULT(`hours no.`)))";
+		$query .= "VALUES (:name, :surname, :mobile, :telephone, :email, IFNULL(:state, DEFAULT(state)), IFNULL(:hours, DEFAULT(`hours no.`)))";
 		$values = 
 			array(
 				':name'        =>   $this->_params['name'],
