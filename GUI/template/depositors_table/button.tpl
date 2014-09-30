@@ -1,1 +1,1 @@
-<a href="<?=$this_details_link?>" ><button type="button" class="btn btn-info btn-sm" style="padding: 3px 10px;" ><?=$details_text?></button></a>
+<a href="<?=$depositor_details_url?><?=$depositor_id?>" ><button type="button" class="btn btn-info btn-sm" style="padding: 3px 10px;" ><?=$details_text?></button></a>

@@ -1,5 +1,7 @@
 <?php
 
+### A PDO Wrapper, ver 0.6 ###
+
 class DB {
 	static $connection;
 	

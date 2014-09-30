@@ -8,9 +8,8 @@ class DepositorController extends AbstractController {
 	public function listAction() {
 		$this->params['page_title'] = $this->params['members_list_text'];
 		
-		#$str = View::render('depositors_table/sort', $this->params, true);
-		#$str = $str.View::render('depositors_table/table_header', $this->params, true);
-		//$str = $str.View::render('depositors_table/nodata', $this->params, true); #dummy template
+		$str = View::render('depositors_table/sort', $this->params, true);
+		$str .= View::render('depositors_table/table_header', $this->params, true);
 		
 		$api_params 
 			=
@@ -33,23 +32,87 @@ class DepositorController extends AbstractController {
 		} catch( Exception $e ) {
 			#catch any exceptions and report the problem
 			@$error = 'Error occurred. Time:'.date('d.m.Y H:i:s');
-			@$error = $error.' Error point: depo:list. Error data: ';
-			@$error = $error.$e->getMessage();
-			@$error = $error.' Trace($data): ';
-			@$error = $error.var_dump($data);
-			@$error = $error.' Trace($e errot object): ';
-			@$error = $error.var_dump($e);
-			@$error = $error.' ========== '."\n";
+			@$error .= ' Error point: depo:list. Error data: ';
+			@$error .= $e->getMessage();
+			@$error .= ' Trace($data): ';
+			@$error .= var_dump($data);
+			@$error .= ' Trace($e errot object): ';
+			@$error .= var_dump($e);
+			@$error .= ' ========== '."\n";
 			@$log = fopen($this->params['error_log_file_path'], 'a+');
 			@fwrite($log, $error);
 			@fclose($log);
 		}
-		print_r($data);
+
+		#result array example
+		// Array
+		// (
+		// 	[pages] => 0.1
+		// 	[page] => 1
+		// 	[success] => 1
+		// 	[result] => Array
+		// 		(
+		// 			[0] => Array
+		// 				(
+		// 					[depositor no.] => 2
+		// 					[name] => Mario
+		// 					[surname] => Rossi
+		// 					[mobile] => %2B39 380 75 00 40
+		// 					[telephone] => 34 25 54
+		// 					[email] => pinco%40pallo.it
+		// 					[state] => unactive
+		// 					[hours no.] => 6
+		// 				)
+
+		// 			[1] => Array
+		// 				(
+		// 					[depositor no.] => 1
+		// 					[name] => Banca
+		// 					[surname] => Del Tempo
+		// 					[mobile] => 0000
+		// 					[telephone] => 0000
+		// 					[email] => info@bancadeltempo-sv.it
+		// 					[state] => active
+		// 					[hours no.] => 1000000000
+		// 				)
+
+		// 		)
+
+		// )
+
+		if (!empty($data['result'])) {
+			foreach ($data['result'] as $d) {
+				$col = function(&$str, $field) {
+					$str .= View::render('depositors_table/column', $this->params, true);
+					$str .= $field;
+					$str .= View::render('depositors_table/column_end', $this->params, true);
+				}
+
+				$str .= View::render('depositors_table/row', $this->params, true);
+
+				$col ($str, $d['depositor no.']);
+				$col ($str, $d['name']);
+				$col ($str, $d['surname']);
+				$col ($str, $d['mobile']);
+				$col ($str, $d['email']);
+				$col ($str, $d['state']);
+
+				$depositor_id = $d['depositor no.'];
+				$str .= View::render('depositors_table/button', $this->params, true); #details button
+
+				$str .= View::render('depositors_table/row_end', $this->params, true);
+			}
+		} else {
+			$str .= View::render('depositors_table/nodata', $this->params, true);
+		}
 		
-		#$str = $str.View::render('depositors_table/table_footer', $this->params, true);
-		#$str = $str.View::render('depositors_table/pagination', $this->params, true);
+		$str .= View::render('depositors_table/table_footer', $this->params, true);
+
+		if ($data['pages'] > 1) {
+			$str .= View::render('depositors_table/pagination', $this->params, true);
+		}
 		
-		#$this->render($str);
+		$this->render($str);
 	}
 	
 	public function createAction() {
@@ -96,7 +159,7 @@ class DepositorController extends AbstractController {
 			  !empty($this->params['document_type']) &&
 			  !empty($this->params['state']) &&
 			  !empty($this->params['available'])
-			 ) {
+			) {
 			
 			$api_params 
 				=
@@ -143,7 +206,11 @@ class DepositorController extends AbstractController {
 				@$log = fopen($this->params['error_log_file_path'], 'a+');
 				@fwrite($log, $error);
 				@fclose($log);
+				@$str = View::render('insert_depositor/unknown_error', $this->params, true);
+				@$this->render($str);
+				@exit();
 			} 
+
 			$this->params['page_title'] = $this->params['insert_a_depositor_text'];
 			$str = View::render('insert_depositor/success', $this->params, true);
 			$this->render($str);
