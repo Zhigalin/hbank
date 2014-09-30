@@ -1,4 +1,4 @@
 - Current global task: create a MWP
-- Task: code the depositor controller, list action, update action and get action
+- Task: code the depositor controller, update action and read action
 - Task: code the transactions controller, list action, read action and create action
 - Minor task: code the installation page
