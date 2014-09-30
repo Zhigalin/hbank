@@ -86,7 +86,7 @@ class DepositorController extends AbstractController {
 					$str .= View::render('depositors_table/column', $this->params, true);
 					$str .= $field;
 					$str .= View::render('depositors_table/column_end', $this->params, true);
-				}
+				};
 
 				$str .= View::render('depositors_table/row', $this->params, true);
 
