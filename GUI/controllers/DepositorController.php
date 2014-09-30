@@ -82,20 +82,20 @@ class DepositorController extends AbstractController {
 
 		if (!empty($data['result'])) {
 			foreach ($data['result'] as $d) {
-				$col = function(&$str, $field) {
-					$str .= View::render('depositors_table/column', $this->params, true);
+				$col = function(&$str, &$obj, $field) {
+					$str .= View::render('depositors_table/column', $obj->params, true);
 					$str .= $field;
-					$str .= View::render('depositors_table/column_end', $this->params, true);
+					$str .= View::render('depositors_table/column_end', $obj->params, true);
 				};
 
 				$str .= View::render('depositors_table/row', $this->params, true);
 
-				$col ($str, $d['depositor no.']);
-				$col ($str, $d['name']);
-				$col ($str, $d['surname']);
-				$col ($str, $d['mobile']);
-				$col ($str, $d['email']);
-				$col ($str, $d['state']);
+				$col ($str, $this, $d['depositor no.']);
+				$col ($str, $this, $d['name']);
+				$col ($str, $this, $d['surname']);
+				$col ($str, $this, $d['mobile']);
+				$col ($str, $this, $d['email']);
+				$col ($str, $this, $d['state']);
 
 				$depositor_id = $d['depositor no.'];
 				$str .= View::render('depositors_table/button', $this->params, true); #details button
