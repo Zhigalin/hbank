@@ -79,7 +79,7 @@ $_LANG['insert_another_depo_text']                                      = 'Inser
 $_LANG['return_text']                                                   = 'Ritorna';
 $_LANG['unknown_registred_error_text_text']                             = 'Si è verificato un errore non riconosciuto. I detagli dell errore sono stati salvati nel apposito registro';
 $_LANG['contact_the_maintainer_text']                                   = 'Contatta l\'amministratore';
-$_LANG['internet_text']                                                 = 'Internet';
+$_LANG['details_text']                                                  = 'Detagli';
 $_LANG['internet_text']                                                 = 'Internet';
 
 ?>
