@@ -37,10 +37,8 @@ class Router {
 		$controller = new $controller($params);
 		
 		#check if the action exists in the controller. if not, throw an exception.
-		var_dump( method_exists ($controller, $action_name));
-		if( is_callable($methodVariable, true) === true ) {
-			#$controller->$action_name($params);
-			echo ' false!';
+		if(method_exists ($controller, $action_name) === true) {
+			$controller->$action_name($params);
 		} else {
 			$controller->notfoundAction();
 		}
