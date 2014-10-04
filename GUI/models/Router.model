@@ -40,7 +40,8 @@ class Router {
 		$methodVariable = array($controller, $action_name);
 		echo is_callable($methodVariable, true);
 		if( is_callable($methodVariable, true) === true ) {
-			$controller->$action_name($params);
+			#$controller->$action_name($params);
+			echo 'false!';
 		} else {
 			$controller->notfoundAction();
 		}
