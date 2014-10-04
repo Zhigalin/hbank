@@ -1,0 +1,40 @@
+<?php
+
+class Pagination {
+	static private $params;
+
+	static public function set($params_array, $page, $pages, $perpage, $url, $page_url) {
+
+		/* Входные параметры */
+		$url = "?controller=depositor&action=list&";
+		$params_array['pagination']['url_page'] = "/index.php?page=";
+		/* Дальше идёт вычисление первой выводимой страницы и последней (чтобы текущая страница была где-то посредине, если это возможно, и чтобы общая сумма выводимых страниц была равна count_show_pages, либо меньше, если количество страниц недостаточно) */
+		$left = $page - 1;
+		$right = $pages - $page;
+
+		if ($left < floor($perpage / 2)) {
+			$params_array['pagination']['start'] = 1;
+		} else {
+			$params_array['pagination']['start'] = $page - floor($perpage / 2);
+		}
+
+		$end = $params_array['pagination']['start'] + $perpage - 1;
+
+		if ($end > $pages) {
+			$params_array['pagination']['start'] -= ($end - $pages);
+			$end = $pages;
+
+			if ($params_array['pagination']['start'] < 1) {
+				$params_array['pagination']['start'] = 1;
+			}
+		}
+
+		self::$params = $params_array;
+	}
+
+	static public function display() {
+		return View::render('depositors_table/pagination', self::$params, true);
+	}
+}
+
+?>

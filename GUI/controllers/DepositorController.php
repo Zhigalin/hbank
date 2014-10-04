@@ -82,7 +82,7 @@ class DepositorController extends AbstractController {
 
 		if (!empty($data['result'])) {
 			foreach ($data['result'] as $d) {
-				$col = function(&$str, $field, $params) {
+				$col = function(&$str, $params, $field) {
 					$str .= View::render('depositors_table/column', $params, true);
 					$str .= $field;
 					$str .= View::render('depositors_table/column_end', $params, true);
@@ -90,18 +90,16 @@ class DepositorController extends AbstractController {
 
 				$str .= View::render('depositors_table/row', $this->params, true);
 
-				$params = $this->params;
-
-				$col ($str, $d['depositor no.'], $params);
-				$col ($str, $d['name'], $params);
-				$col ($str, $d['surname'], $params);
-				$col ($str, $d['mobile'], $params);
-				$col ($str, $d['email'], $params);
-				$col ($str, $d['hours no.'], $params);
-				$col ($str, $d['state'], $params);
+				$col ($str, $this->params, urldecode($d['depositor no.']));
+				$col ($str, $this->params, urldecode($d['name']));
+				$col ($str, $this->params, urldecode($d['surname']));
+				$col ($str, $this->params, urldecode($d['mobile']));
+				$col ($str, $this->params, urldecode($d['email']));
+				$col ($str, $this->params, urldecode($d['hours no.']));
+				$col ($str, $this->params, urldecode($d['state']));
 
 				$this->params['depositor_id'] = $d['depositor no.'];
-				$col ($str, View::render('depositors_table/button', $this->params, true), $params); #details button
+				$col ($str, View::render('depositors_table/button', $this->params, true), $this->params); #details button
 
 				$str .= View::render('depositors_table/row_end', $this->params, true);
 			}
@@ -112,7 +110,13 @@ class DepositorController extends AbstractController {
 		$str .= View::render('depositors_table/table_footer', $this->params, true);
 
 		if ($data['pages'] > 1) {
-			$str .= View::render('depositors_table/pagination', $this->params, true);
+
+			$url = $_SERVER['QUERY_STRING'].'page=1';
+			$page_url = $_SERVER['QUERY_STRING'].'page=';
+
+			Pagination::set($this->params, $data['page'], $data['pages'], $this->params['perpage'], $url, $page_url);
+
+			$str .= Pagination::display();
 		}
 		
 		$this->render($str);
