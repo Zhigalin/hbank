@@ -99,7 +99,8 @@ class DepositorController extends AbstractController {
 				$col ($str, $this->params, urldecode($d['state']));
 
 				$this->params['depositor_id'] = $d['depositor no.'];
-				$col ($str, View::render('depositors_table/button', $this->params, true), $this->params); #details button
+				var_dump($this->params['depositor_id']);
+				$col ($str, $this->params, View::render('depositors_table/button', $this->params, true)); #details button
 
 				$str .= View::render('depositors_table/row_end', $this->params, true);
 			}
