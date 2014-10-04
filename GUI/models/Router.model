@@ -38,7 +38,8 @@ class Router {
 		
 		#check if the action exists in the controller. if not, throw an exception.
 		$methodVariable = array($controller, $action_name);
-		echo is_callable($methodVariable, true);
+		echo is_callable($methodVariable, true, $calla);
+		echo $calla;
 		if( is_callable($methodVariable, true) === true ) {
 			#$controller->$action_name($params);
 			echo 'false!';
