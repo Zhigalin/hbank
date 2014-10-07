@@ -80,6 +80,8 @@ $_LANG['return_text']                                                   = 'Ritor
 $_LANG['unknown_registred_error_text_text']                             = 'Si è verificato un errore non riconosciuto. I detagli dell errore sono stati salvati nel apposito registro';
 $_LANG['contact_the_maintainer_text']                                   = 'Contatta l\'amministratore';
 $_LANG['details_text']                                                  = 'Detagli';
-$_LANG['internet_text']                                                 = 'Internet';
+$_LANG['blank_field_text']                                              = 'Campo non compilato';
+$_LANG['depositor_data_text']                                           = 'I dati del correntista';
+$_LANG['depositor_data_text']                                           = 'I dati del correntista';
 
 ?>
