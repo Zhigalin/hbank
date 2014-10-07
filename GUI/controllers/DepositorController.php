@@ -2,7 +2,9 @@
 
 class DepositorController extends AbstractController {
 	protected function render($str) {
-		echo View::render('header', $this->params, true).$str.View::render('footer', $this->params, true);
+		View::render('header', $this->params);
+		echo $str;
+		View::render('footer', $this->params);
 	}
 	
 	public function listAction() {
@@ -37,20 +39,7 @@ class DepositorController extends AbstractController {
 			$data = $this->_API->sendRequest($api_params);
 		} catch( Exception $e ) {
 			#catch any exceptions and report the problem
-			@$error  = 'Error occurred. Time:'.date('d.m.Y H:i:s');
-			@$error .= ' Error point: depo:list. Error data: ';
-			@$error .= $e->getMessage();
-			@$error .= ' Trace($data): ';
-			@$error .= var_dump($data);
-			@$error .= ' Trace($e errot object): ';
-			@$error .= var_dump($e);
-			@$error .= ' ========== '."\n";
-			@$log    = fopen($this->params['error_log_file_path'], 'a+');
-			@fwrite($log, $error);
-			@fclose($log);
-			@$str = View::render('unknown_error', $this->params, true);
-			@$this->render($str);
-			@exit();
+			@ErrorHandling::APIException('depo:list', $data, $api_params, $e, $this->params);
 		}
 
 		#result array example
@@ -140,20 +129,7 @@ class DepositorController extends AbstractController {
 			$data = $this->_API->sendRequest($api_params); 
 		}  catch( Exception $e ) {
 			#catch any exceptions and report the problem
-			@$error  = 'Error occurred. Time:'.date('d.m.Y H:i:s');
-			@$error .= ' Error point: depo:create:1. Error data: ';
-			@$error .= $e->getMessage();
-			@$error .= ' Trace($data): ';
-			@$error .= var_dump($data);
-			@$error .= ' Trace($e errot object): ';
-			@$error .= var_dump($e);
-			@$error .= ' ========== '."\n";
-			@$log    = fopen($this->params['error_log_file_path'], 'a+');
-			@fwrite($log, $error);
-			@fclose($log);
-			@$str = View::render('unknown_error', $this->params, true);
-			@$this->render($str);
-			@exit();
+			@ErrorHandling::APIException('depo:create:1', $data, $api_params, $e, $this->params);
 		}
 		
 		$this->params['next_depositor_num'] = $data['result']['depositor no.']+1;
@@ -164,20 +140,7 @@ class DepositorController extends AbstractController {
 			$data = $this->_API->sendRequest($api_params); 
 		}  catch( Exception $e ) {
 			#catch any exceptions and report the problem
-			@$error  = 'Error occurred. Time:'.date('d.m.Y H:i:s');
-			@$error .= ' Error point: depo:create:2. Error data: ';
-			@$error .= $e->getMessage();
-			@$error .= ' Trace($data): ';
-			@$error .= var_dump($data);
-			@$error .= ' Trace($e errot object): ';
-			@$error .= var_dump($e);
-			@$error .= ' ========== '."\n";
-			@$log    = fopen($this->params['error_log_file_path'], 'a+');
-			@fwrite($log, $error);
-			@fclose($log);
-			@$str = View::render('unknown_error', $this->params, true);
-			@$this->render($str);
-			@exit();
+			@ErrorHandling::APIException('depo:create:2', $data, $api_params, $e, $this->params);
 		}
 		
 		$this->params['init_hours_num'] = $data['init_hours_num'];
@@ -239,20 +202,7 @@ class DepositorController extends AbstractController {
 				$data = $this->_API->sendRequest($api_params); 
 			} catch( Exception $e ) {
 				#catch any exceptions and report the problem
-				@$error  = 'Error occurred. Time:'.date('d.m.Y H:i:s');
-				@$error .= ' Error point: depo:insert. Error data: ';
-				@$error .= $e->getMessage();
-				@$error .= ' Trace($data): ';
-				@$error .= var_dump($data);
-				@$error .= ' Trace($e errot object): ';
-				@$error .= var_dump($e);
-				@$error .= ' ========== '."\n";
-				@$log    = fopen($this->params['error_log_file_path'], 'a+');
-				@fwrite($log, $error);
-				@fclose($log);
-				@$str = View::render('unknown_error', $this->params, true);
-				@$this->render($str);
-				@exit();
+				@ErrorHandling::APIException('depo:insert', $data, $api_params, $e, $this->params);
 			} 
 
 			$this->params['page_title'] = $this->params['insert_a_depositor_text'];
@@ -287,20 +237,7 @@ class DepositorController extends AbstractController {
 			$data = $this->_API->sendRequest($api_params);
 		} catch( Exception $e ) {
 			#catch any exceptions and report the problem
-			@$error  = 'Error occurred. Time:'.date('d.m.Y H:i:s');
-			@$error .= ' Error point: depo:read. Error data: ';
-			@$error .= $e->getMessage();
-			@$error .= ' Trace($data): ';
-			@$error .= var_dump($data);
-			@$error .= ' Trace($e errot object): ';
-			@$error .= var_dump($e);
-			@$error .= ' ========== '."\n";
-			@$log    = fopen($this->params['error_log_file_path'], 'a+');
-			@fwrite($log, $error);
-			@fclose($log);
-			@$str = View::render('unknown_error', $this->params, true);
-			@$this->render($str);
-			@exit();
+			@ErrorHandling::APIException('depo:read', $data, $api_params, $e, $this->params);
 		}
 
 		$this->params['depositor'] = $data['result'];
