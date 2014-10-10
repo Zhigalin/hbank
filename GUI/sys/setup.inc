@@ -4,7 +4,7 @@ session_start();
 
 mb_internal_encoding('UTF-8');
 
-error_reporting(E_ALL);
+error_reporting(E_ALL | E_STRICT);
 ini_set('display_errors', 1);
 
 require 'controllers/AbstractController.php';
