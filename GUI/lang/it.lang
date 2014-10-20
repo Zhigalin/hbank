@@ -82,6 +82,6 @@ $_LANG['contact_the_maintainer_text']                                   = 'Conta
 $_LANG['details_text']                                                  = 'Detagli';
 $_LANG['blank_field_text']                                              = 'Campo non compilato';
 $_LANG['depositor_data_text']                                           = 'I dati del correntista';
-$_LANG['depositor_data_text']                                           = 'I dati del correntista';
+$_LANG['update_depositor_data_text']                                    = 'Aggiorna i dati del correntista';
 
 ?>

@@ -6,6 +6,26 @@ class DepositorController extends AbstractController {
 		echo $str;
 		View::render('footer', $this->params);
 	}
+
+	protected function get_depositor() {
+		$api_params 
+			=
+			@array (
+				'controller'     => 'depositor',
+				'action'         => 'read',
+				'id'             => $this->params['id']
+			)
+		;
+		
+		try {
+			$data = $this->_API->sendRequest($api_params);
+		} catch( Exception $e ) {
+			#catch any exceptions and report the problem
+			@ErrorHandling::APIException('depo:get', $data, $api_params, $e, $this->params);
+		}
+
+		return $data['result'];
+	}
 	
 	public function listAction() {
 		if($this->params['searchfor'] === 'id') {
@@ -224,24 +244,22 @@ class DepositorController extends AbstractController {
 
 		$this->params['page_title'] = $this->params['depositor_data_text'];
 
-		$api_params 
-			=
-			@array (
-				'controller'     => 'depositor',
-				'action'         => 'read',
-				'id'             => $this->params['id']
-			)
-		;
-		
-		try {
-			$data = $this->_API->sendRequest($api_params);
-		} catch( Exception $e ) {
-			#catch any exceptions and report the problem
-			@ErrorHandling::APIException('depo:read', $data, $api_params, $e, $this->params);
+		$this->params['depositor'] = $this->get_depositor();
+		$str = View::render('depositor_read/main', $this->params, true);
+		$this->render($str);
+	}
+
+	public function updateAction() {
+		if(empty($this->params['id'])) {
+			$str = View::render('depositor_update/noid', $this->params, true);
+			$this->render($str);
+			exit();
 		}
 
-		$this->params['depositor'] = $data['result'];
-		$str = View::render('depositor_read/main', $this->params, true);
+		$this->params['page_title'] = $this->params['update_depositor_data_text'];
+
+		$this->params['depositor'] = $this->get_depositor();
+		$str = View::render('depositor_update/main', $this->params, true);
 		$this->render($str);
 	}
 }

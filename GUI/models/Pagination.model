@@ -4,11 +4,9 @@ class Pagination {
 	static private $params;
 
 	static public function set($params_array, $page, $pages, $perpage, $url, $page_url) {
+		$params_array['pagination']['url']      = $url;
+		$params_array['pagination']['url_page'] = $page_url;
 
-		/* Входные параметры */
-		$url = "?controller=depositor&action=list&";
-		$params_array['pagination']['url_page'] = "/index.php?page=";
-		/* Дальше идёт вычисление первой выводимой страницы и последней (чтобы текущая страница была где-то посредине, если это возможно, и чтобы общая сумма выводимых страниц была равна count_show_pages, либо меньше, если количество страниц недостаточно) */
 		$left = $page - 1;
 		$right = $pages - $page;
 
