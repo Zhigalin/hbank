@@ -18,6 +18,27 @@ class DepositorController {
 	}
 	
 	public function createAction() {
+		$query = "INSERT INTO `depositors` (`name`, `surname`, `mobile`, `telephone`, `email`, `state`, `hours no.`) ";
+		$query .= "VALUES (:name, :surname, :mobile, :telephone, :email, IFNULL(:state, DEFAULT(state)), IFNULL(:hours, DEFAULT(`hours no.`)))";
+		$values = 
+			array(
+				':name'        =>   $this->_params['name'],
+				':surname'     =>   $this->_params['surname'],
+				':mobile'      =>   $this->_params['mobile'],
+				':telephone'   =>   $this->_params['telephone'],
+				':email'       =>   $this->_params['email'],
+				':state'       =>   $this->_params['state'] === 'unactive' ? 'unactive' : 'null',
+				':hours'       =>   $this->_params['hours'] ? $this->_params['hours'] : 'null'
+			)
+		;
+
+ 		if(DB::insert($query, $values) === true) {
+			$data['success'] = true;
+		} else {
+			$data['success'] = false;
+			return $data;
+		}
+
 		##############################################################################
 		#                               Fields:                                      #
 		#                                                                            #
@@ -47,17 +68,24 @@ class DepositorController {
 		#     *: depends of the bank settings, however the standart is 5 hours PP    #
 		##############################################################################
 		
-		$query = "INSERT INTO `depositors` (`name`, `surname`, `mobile`, `telephone`, `email`, `state`, `hours no.`) ";
-		$query .= "VALUES (:name, :surname, :mobile, :telephone, :email, IFNULL(:state, DEFAULT(state)), IFNULL(:hours, DEFAULT(`hours no.`)))";
+		
+		$query = "INSERT INTO `other_data` (`birth_place`, `birth_date`, `sex`, `street`, `civic`, `document`, `document_type`, `profession`, `degree`, `info_from`, `associations`, `available`, `notes`) ";
+		$query .= "VALUES (:birth_place, :birth_date, :sex, :street, :civic, :document, :document_type, :profession, :degree, :info_from, :associations, :available, :notes)";
 		$values = 
 			array(
-				':name'        =>   $this->_params['name'],
-				':surname'     =>   $this->_params['surname'],
-				':mobile'      =>   $this->_params['mobile'],
-				':telephone'   =>   $this->_params['telephone'],
-				':email'       =>   $this->_params['email'],
-				':state'       =>   $this->_params['state'] === 'unactive' ? 'unactive' : 'null',
-				':hours'       =>   $this->_params['hours'] ? $this->_params['hours'] : 'null'
+				':birth_place'    =>   $this->_params['birth_place'],
+				':birth_date'     =>   $this->_params['birth_date'],
+				':sex'            =>   $this->_params['sex'],
+				':street'         =>   $this->_params['street'],
+				':civic'          =>   $this->_params['civic'],
+				':document'       =>   $this->_params['document'],
+				':document_type'  =>   $this->_params['document_type'],
+				':profession'     =>   $this->_params['profession'],
+				':degree'         =>   $this->_params['degree'],
+				':info_from'      =>   $this->_params['info_from'],
+				':associations'   =>   $this->_params['associations'],
+				':available'      =>   $this->_params['available'],
+				':notes'          =>   $this->_params['notes']
 			)
 		;
 
@@ -66,7 +94,7 @@ class DepositorController {
 		} else {
 			$data['success'] = false;
 		}
-		
+
 		return $data;
 	}
 	
