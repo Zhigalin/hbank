@@ -1,6 +1,6 @@
 <?php
 
-### Controller file for depositors related actions rev 0.4 ###
+### Controller file for depositors related actions rev 0.45 ###
 
 class DepositorController {
 	private $_params;
@@ -8,7 +8,7 @@ class DepositorController {
 	public function __construct($params)
 	{
 		$this->_params = $params;
-
+			
 		try {
 			DB::init();
 		} catch( Exception $e ) {
@@ -27,8 +27,8 @@ class DepositorController {
 				':mobile'      =>   $this->_params['mobile'],
 				':telephone'   =>   $this->_params['telephone'],
 				':email'       =>   $this->_params['email'],
-				':state'       =>   $this->_params['state'] === 'unactive' ? 'unactive' : 'null',
-				':hours'       =>   $this->_params['hours'] ? $this->_params['hours'] : 'null'
+				':state'       =>   $this->_params['state'] === 'unactive' ? 'unactive' : 'active',
+				':hours'       =>   $this->_params['hours'] ? $this->_params['hours'] : '5'
 			)
 		;
 
@@ -88,7 +88,7 @@ class DepositorController {
 				':notes'          =>   $this->_params['notes']
 			)
 		;
-
+			
  		if(DB::insert($query, $values) === true) {
 			$data['success'] = true;
 		} else {
@@ -149,7 +149,19 @@ class DepositorController {
 	}
 	
 	public function readAction() {
-		#read all the depositor data
+		$data = array();
+			
+		$query = 'SELECT * FROM depositors WHERE `depositor no.` = '.$this->_params['id'];
+		
+		if ($data = DB::exec($query)) {
+			$data['result'] = $data[0];
+			$data['success'] = true;
+			return $data;
+		} else {
+			$data['success'] = false;
+			$data['errormsg'] = 'DB fault';
+			return $data;
+		}
 	}
 	
 	public function updateAction() {

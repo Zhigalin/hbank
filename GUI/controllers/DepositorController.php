@@ -8,7 +8,7 @@ class DepositorController extends AbstractController {
 	}
 
 	protected function get_depositor() {
-		$api_params 
+		$api_params
 			=
 			@array (
 				'controller'     => 'depositor',
