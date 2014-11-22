@@ -169,7 +169,7 @@
 			<div style="width: 100px; height: 25px; margin: 0 auto;">
 				<button type="submit" class="btn btn-default" name="insert"><?=$insert_text?></button>
 			</div>
-						<div style="height: 33px; padding-top: 7px; margin-top: 27px; text-align: center; display: none;" class="alert alert-danger" role="alert">ERRORE: Indirizzo e-mail già presente nel database!</div>
+			<div style="height: 33px; padding-top: 7px; margin-top: 27px; text-align: center; display: none;" class="alert alert-danger" role="alert">ERRORE: Indirizzo e-mail già presente nel database!</div>
 			<div style="height: 33px; padding-top: 7px; margin-top: 27px; text-align: center; display: none;" class="alert alert-danger" role="alert">ERRORE: Numero di telefono già presente nel database!</div>
 			<div style="height: 33px; padding-top: 7px; margin-top: 27px; text-align: center; display: none;" class="alert alert-danger" role="alert">ERRORE: Numero documento già presente nel database!</div>
 		</form>

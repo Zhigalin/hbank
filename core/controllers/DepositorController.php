@@ -1,6 +1,6 @@
 <?php
 
-### Controller file for depositors related actions rev 0.45 ###
+### Controller file for depositors related actions rev 0.45
 
 class DepositorController {
 	private $_params;
@@ -151,7 +151,7 @@ class DepositorController {
 	public function readAction() {
 		$data = array();
 			
-		$query = 'SELECT * FROM depositors WHERE `depositor no.` = '.$this->_params['id'];
+		$query = 'SELECT * FROM depositors WHERE `depositor no.` = '.$this->_params['id'].'UNION SELECT * FROM other_data WHERE `depositor no.` = '.$this->_params['id'];
 		
 		if ($data = DB::exec($query)) {
 			$data['result'] = $data[0];
@@ -163,7 +163,7 @@ class DepositorController {
 			return $data;
 		}
 	}
-	
+		
 	public function updateAction() {
 		#update a depositor
 	}
