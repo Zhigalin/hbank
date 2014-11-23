@@ -237,7 +237,8 @@ class DepositorController extends AbstractController {
 
 	public function readAction() {
 		if(empty($this->params['id'])) {
-			$str = View::render('depositor_read/noid', $this->params, true);
+			$str = 'true';
+			//View::render('depositor_read/noid', $this->params, true);
 			$this->render($str);
 			exit();
 		}
