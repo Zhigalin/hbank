@@ -16,16 +16,6 @@ class AuthController extends AbstractController {
 	}
 	
 	public function loginAction() {
-		if (!isset($_SESSION['email'])) {
-			$this->params['page_title'] = $this->params['please_log_in_text'];
-			
-			$str = View::render('auth/login', $this->params);
-		} else {
-			$this->authorizeAction();
-		}
-	}
-	
-	public function authorizeAction() {
 		global $_OPERATORS;
 		
 		if (!isset($_SESSION['email'])) {
@@ -34,22 +24,28 @@ class AuthController extends AbstractController {
 					$_SESSION['email'] = $this->params['email'];
 					$_SESSION['password'] = $this->params['password'];
 					
-					require 'controllers/DefaultController.php';
-					$obj = new DefaultController($this->params);
-					$obj->indexAction();
+					if(@$this->params['exaction']!=='create'&&@$this->params['exaction']!=='update'&&@$this->params['exaction']!=='delete') {
+						header("Location: ".$_SERVER['HTTP_REFERER'],TRUE,302);
+					} else {
+						header("Location: index.php",TRUE,302);
+					}
 				} else {
 					$this->params['page_title'] = $this->params['wrong_password_text'];
 					View::render('auth/nopasswd', $this->params);
 				}
 			} else {
-				$this->params['page_title'] = $this->params['wrong_mail_text'];
-				View::render('auth/nomail', $this->params);
+				#$this->params['page_title'] = $this->params['wrong_mail_text'];
+				#View::render('auth/nomail', $this->params);
+				$this->params['page_title'] = $this->params['please_log_in_text'];
+				$str = View::render('auth/login', $this->params);
 			}
 		} elseif (isset($_SESSION['password'])) {
 			if ($_OPERATORS[$_SESSION['email']] === $_SESSION['password']) {
-				require 'controllers/DefaultController.php';
-				$obj = new DefaultController($this->params);
-				$obj->indexAction();
+				if(@$this->params['exaction']!=='create' && @$this->params['exaction']!=='update' && @$this->params['exaction']!=='delete') {
+					header("Location: ".$_SERVER['HTTP_REFERER'],TRUE,302);
+				} else {
+					header("Location: index.php",TRUE,302);
+				}
 			} else {
 				$this->params['page_title'] = $this->params['wrong_password_text'];
 				View::render('auth/nopasswd', $this->params);
@@ -59,10 +55,10 @@ class AuthController extends AbstractController {
 			$str = View::render('auth/login', $this->params);
 		}
 	}
-	
+
 	public function exitAction() {
 		session_unset();
-		$this->loginAction();
+		header("Location: index.php",TRUE,302);
 	}
 }
 

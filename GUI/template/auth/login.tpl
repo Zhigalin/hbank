@@ -24,7 +24,8 @@
 	<div class="container" style="margin-top: 10%">
 		<form class="form-signin" role="form" action="index.php" method="POST">
 			<input type="hidden" name="controller" value="auth">
-			<input type="hidden" name="action" value="authorize">
+			<input type="hidden" name="action" value="login">
+			<input type="hidden" name="exaction" value="<?=$action?>">
 			<h2 class="form-signin-heading"><?=$please_log_in_text?></h2>
 			<input type="email" class="form-control" name="email" placeholder="<?=$email_address_text?>" required autofocus>
 			<input type="password" class="form-control" name="password" placeholder="<?=$password_text?>" required>
