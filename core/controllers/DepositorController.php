@@ -72,7 +72,7 @@ class DepositorController {
 		$query = "INSERT INTO `other_data` (`birth_place`, `birth_date`, `sex`, `street`, `civic`, `document`, `document_type`, `profession`, `degree`, `info_from`, `associations`, `available`, `notes`) ";
 		$query .= "VALUES (:birth_place, :birth_date, :sex, :street, :civic, :document, :document_type, :profession, :degree, :info_from, :associations, :available, :notes)";
 		$values = 
-			array(
+			@array(
 				':birth_place'    =>   $this->_params['birth_place'],
 				':birth_date'     =>   $this->_params['birth_date'],
 				':sex'            =>   $this->_params['sex'],
