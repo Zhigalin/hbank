@@ -36,7 +36,6 @@ class DepositorController {
 			$data['success'] = true;
 		} else {
 			$data['success'] = false;
-			return $data;
 		}
 
 		##############################################################################
