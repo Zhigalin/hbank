@@ -1,5 +1,15 @@
-<br>
-<div style="height: 33px; padding-top: 7px; margin-top: 27px; text-align: center;" class="alert alert-danger" role="alert"><?=$unknown_registred_error_text?></div>
-<br><br><br>
-<h6 style="text-align: center;"><a href="mailto:<?=$maintainer_mail?>"><?=$contact_the_maintainer_text?></a></h6>
-<br><br><br>
+<div class="panel panel-default" style="margin: 20px;">
+	<div class="panel-heading">
+		<h3 class="panel-title"><?=$sort_title_text?></h3>
+	</div>
+	<div class="panel-body">
+		<div style="width: 100%;" class="col-lg-6">
+			<div class="input-group"> 
+				<input type="search" class="form-control" name="id">
+				<div class="input-group-btn">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><?=$filter_text?></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
