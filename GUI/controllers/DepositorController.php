@@ -165,7 +165,7 @@ class DepositorController extends AbstractController {
 		
 		$this->params['init_hours_num'] = $data['init_hours_num'];
 		
-		$str = View::render('insert_depositor/insert', $this->params, true);
+		$str = View::render('depositor_insert/insert', $this->params, true);
 		
 		$this->render($str);
 	}
