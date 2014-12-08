@@ -5,7 +5,7 @@ class ErrorHandling {
 	static public function APIException($point, $data, $api_params, $exception, $params_array) {
 		@$error  = 'Error occurred. Time:'.date('d.m.Y H:i:s');
 		@$error .= ' Error point: '.$point.'. Error data: ';
-		@$error .= $e->getMessage()."\n";
+		@$error .= $exception->getMessage()."\n";
 		@$error .= ' Trace($data): ';
 		@$error .= var_dump($data)."\n";
 		@$error .= ' Trace(API params): ';
