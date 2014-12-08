@@ -68,15 +68,14 @@ class DepositorController {
 		##############################################################################
 		
 		
-		$query = "INSERT INTO `other_data` (`birth_place`, `birth_date`, `sex`, `street`, `civic`, `document`, `document_type`, `profession`, `degree`, `info_from`, `associations`, `available`, `notes`) ";
-		$query .= "VALUES (:birth_place, :birth_date, :sex, :street, :civic, :document, :document_type, :profession, :degree, :info_from, :associations, :available, :notes)";
+		$query = "INSERT INTO `other_data` (`place of birth`, `date of birth`, `sex`, `adress`, `document`, `document_type`, `profession`, `degree`, `info_from`, `associations`, `available`, `notes`) ";
+		$query .= "VALUES (:birth_place, :birth_date, :sex, :adress, :document, :document_type, :profession, :degree, :info_from, :associations, :available, :notes)";
 		$values = 
 			@array(
 				':birth_place'    =>   $this->_params['birth_place'],
 				':birth_date'     =>   $this->_params['birth_date'],
 				':sex'            =>   $this->_params['sex'],
-				':street'         =>   $this->_params['street'],
-				':civic'          =>   $this->_params['civic'],
+				':adress'         =>   $this->_params['street'].' '.$this->_params['civic'],
 				':document'       =>   $this->_params['document'],
 				':document_type'  =>   $this->_params['document_type'],
 				':profession'     =>   $this->_params['profession'],
