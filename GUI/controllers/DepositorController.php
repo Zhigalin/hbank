@@ -226,11 +226,11 @@ class DepositorController extends AbstractController {
 			} 
 
 			$this->params['page_title'] = $this->params['insert_a_depositor_text'];
-			$str = View::render('insert_depositor/success', $this->params, true);
+			$str = View::render('depositor_insert/success', $this->params, true);
 			$this->render($str);
 		} else {
 			$this->params['page_title'] = $this->params['blank_field_text'];
-			$str = View::render('insert_depositor/blank', $this->params, true);
+			$str = View::render('depositor_insert/blank', $this->params, true);
 			$this->render($str);
 		}
 	}
