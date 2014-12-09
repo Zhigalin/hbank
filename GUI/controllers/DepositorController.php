@@ -26,6 +26,21 @@ class DepositorController extends AbstractController {
 
 		return $data['result'];
 	}
+
+	public function readAction() {
+		if(!isset($this->params['id'])) {
+			$str = View::render('depositor_read/noid', $this->params, true);
+			$this->render($str);
+			exit();
+		}
+
+		$this->params['page_title'] = $this->params['depositor_data_text'];
+
+		$this->params['depositor'] = $this->get_depositor();
+		var_dump($this->params['depositor']);
+		$str = View::render('depositor_read/main', $this->params, true);
+		$this->render($str);
+	}
 	
 	public function listAction() {
 		if($this->params['searchfor'] === 'id') {
@@ -233,20 +248,6 @@ class DepositorController extends AbstractController {
 			$str = View::render('depositor_insert/blank', $this->params, true);
 			$this->render($str);
 		}
-	}
-
-	public function readAction() {
-		if(!isset($this->params['id'])) {
-			$str = View::render('depositor_read/noid', $this->params, true);
-			$this->render($str);
-			exit();
-		}
-
-		$this->params['page_title'] = $this->params['depositor_data_text'];
-
-		#$this->params['depositor'] = $this->get_depositor();
-		$str = View::render('depositor_read/main', $this->params, true);
-		$this->render($str);
 	}
 
 	public function updateAction() {
