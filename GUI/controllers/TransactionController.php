@@ -1,15 +1,12 @@
 <?php
 
 class TransactionController extends AbstractController {
-	protected $page_title;
 	
-	public function listAction($params = null) {
-		
-	}
-	
-	protected function render($str) {
-		
+	public function insertAction() {
+		$this->params['page_title'] = $this->params['insert_a_transaction_text'];
+
+		$str = View::render('transaction_insert/main', $this->params, true);
+		$this->render($str);
 	}
 }
-
 ?>

@@ -1,11 +1,6 @@
 <?php
 
 class DepositorController extends AbstractController {
-	protected function render($str) {
-		View::render('header', $this->params);
-		echo $str;
-		View::render('footer', $this->params);
-	}
 
 	protected function get_depositor() {
 		$api_params
@@ -263,6 +258,7 @@ class DepositorController extends AbstractController {
 		$str = View::render('depositor_update/main', $this->params, true);
 		$this->render($str);
 	}
+
 }
 
 ?>

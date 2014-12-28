@@ -35,7 +35,11 @@ abstract class AbstractController {
 		}
 	}
 	
-	abstract protected function render($str);
+	protected function render($str) {
+		View::render('header', $this->params);
+		echo $str;
+		View::render('footer', $this->params);
+	}
 	
 	public function notfoundAction() {
 		header('HTTP/1.1 404 Not found');
