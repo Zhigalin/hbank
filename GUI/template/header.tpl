@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="<?=$bootstrap_main_css?>" />
 	<link rel="stylesheet" type="text/css" href="<?=$bootstrap_theme_css?>" />
 	<link rel="stylesheet" type="text/css" href="<?=$main_stylesheet?>" />
