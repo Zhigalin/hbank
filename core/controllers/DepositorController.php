@@ -28,16 +28,17 @@ class DepositorController {
 				':telephone'   =>   $this->_params['telephone'],
 				':email'       =>   $this->_params['email'],
 				':state'       =>   $this->_params['state'] === 'unactive' ? 'unactive' : 'active',
-				':hours'       =>   $this->_params['hours'] ? $this->_params['hours'] : '5'
+				':hours'       =>   isset($this->_params['hours']) ? $this->_params['hours'] : '5'
 			)
 		;
-
- 		if(DB::insert($query, $values) === true) {
+		
+		if(DB::insert($query, $values) === true) {
 			$data['success'] = true;
 		} else {
 			$data['success'] = false;
+			return $data;
 		}
-
+		
 		##############################################################################
 		#                               Fields:                                      #
 		#                                                                            #
@@ -92,13 +93,13 @@ class DepositorController {
 		} else {
 			$data['success'] = false;
 		}
-
+		
 		return $data;
 	}
 	
 	public function listAction() {
 		$data = array();
-
+		
 		if (empty($this->_params['page'])) {
 			$this->_params['page'] = 1;
 		}
@@ -111,8 +112,8 @@ class DepositorController {
 		if (empty($this->_params['sortorder'])) {
 			$this->_params['sortorder'] = 'DESC';
 		}
-
-		if (!empty($this->_params['search'])) {
+		
+		if (isset($this->_params['search'])) {
 			#TODO
 		} else {
 			$from = ( $this->_params['page'] * $this->_params['perpage'] ) - $this->_params['perpage'];
@@ -133,7 +134,7 @@ class DepositorController {
 	
 	public function getlastnumAction() {
 		$data = array();
-
+		
 		$query = 'SELECT `depositor no.` FROM depositors ORDER BY `depositor no.` DESC LIMIT 1';
 		if ($data = DB::exec($query)) {
 			$data['result'] = $data[0];

@@ -1,7 +1,7 @@
 <?php
 
 class DepositorController extends AbstractController {
-
+	
 	protected function get_depositor() {
 		$api_params
 			=
@@ -18,19 +18,19 @@ class DepositorController extends AbstractController {
 			#catch any exceptions and report the problem
 			@ErrorHandling::APIException('depo:get', $data, $api_params, $e, $this->params);
 		}
-
+		
 		return $data['result'];
 	}
-
+	
 	public function readAction() {
 		if(!isset($this->params['id'])) {
 			$str = View::render('depositor_read/noid', $this->params, true);
 			$this->render($str);
 			exit();
 		}
-
+		
 		$this->params['page_title'] = $this->params['depositor_data_text'];
-
+		
 		$this->params['depositor'] = $this->get_depositor();
 		var_dump($this->params['depositor']);
 		$str = View::render('depositor_read/main', $this->params, true);
@@ -43,7 +43,7 @@ class DepositorController extends AbstractController {
 			$this->readAction();
 			exit();
 		}
-
+		
 		$this->params['page_title'] = $this->params['members_list_text'];
 		
 		$str = View::render('depositors_table/sort', $this->params, true);
@@ -71,7 +71,7 @@ class DepositorController extends AbstractController {
 			#catch any exceptions and report the problem
 			@ErrorHandling::APIException('depo:list', $data, $api_params, $e, $this->params);
 		}
-
+		
 		#result array example
 		// Array
 		// (
@@ -91,7 +91,7 @@ class DepositorController extends AbstractController {
 		// 					[state] => unactive
 		// 					[hours no.] => 6
 		// 				)
-
+		
 		// 			[1] => Array
 		// 				(
 		// 					[depositor no.] => 1
@@ -103,11 +103,11 @@ class DepositorController extends AbstractController {
 		// 					[state] => active
 		// 					[hours no.] => 1000000000
 		// 				)
-
+		
 		// 		)
-
+		
 		// )
-
+		
 		if (!empty($data['result'])) {
 			foreach ($data['result'] as $d) {
 				$col = function(&$str, $params, $field) {
@@ -115,9 +115,9 @@ class DepositorController extends AbstractController {
 					$str .= $field;
 					$str .= View::render('depositors_table/column_end', $params, true);
 				};
-
+				
 				$str .= View::render('depositors_table/row', $this->params, true);
-
+				
 				$col ($str, $this->params, urldecode($d['depositor no.']));
 				$col ($str, $this->params, urldecode($d['name']));
 				$col ($str, $this->params, urldecode($d['surname']));
@@ -125,10 +125,10 @@ class DepositorController extends AbstractController {
 				$col ($str, $this->params, urldecode($d['email']));
 				$col ($str, $this->params, urldecode($d['hours no.']));
 				$col ($str, $this->params, urldecode($d['state']));
-
+				
 				$this->params['depositor_id'] = $d['depositor no.'];
 				$col ($str, $this->params, View::render('depositors_table/button', $this->params, true)); #details button
-
+				
 				$str .= View::render('depositors_table/row_end', $this->params, true);
 			}
 		} else {
@@ -136,14 +136,14 @@ class DepositorController extends AbstractController {
 		}
 		
 		$str .= View::render('depositors_table/table_footer', $this->params, true);
-
+		
 		if ($data['pages'] > 1) {
-
+		
 			$url = $_SERVER['QUERY_STRING'].'page=1';
 			$page_url = $_SERVER['QUERY_STRING'].'page=';
-
+			
 			Pagination::set($this->params, $data['page'], $data['pages'], $this->params['perpage'], $url, $page_url);
-
+			
 			$str .= Pagination::display();
 		}
 		
@@ -155,7 +155,7 @@ class DepositorController extends AbstractController {
 		
 		$api_params = array ('controller' => 'depositor', 'action' => 'getlastnum');
 		
-		try { 
+		try {
 			$data = $this->_API->sendRequest($api_params); 
 		}  catch( Exception $e ) {
 			#catch any exceptions and report the problem
@@ -166,7 +166,7 @@ class DepositorController extends AbstractController {
 		
 		$api_params = array ('controller' => 'bank', 'action' => 'getinithours');
 		
-		try { 
+		try {
 			$data = $this->_API->sendRequest($api_params); 
 		}  catch( Exception $e ) {
 			#catch any exceptions and report the problem
@@ -198,7 +198,7 @@ class DepositorController extends AbstractController {
 			  !empty($this->params['available'])
 			) {
 			
-			$api_params 
+			$api_params
 				=
 				@array (
 					'controller'     => 'depositor',
@@ -228,13 +228,13 @@ class DepositorController extends AbstractController {
 				)
 			;
 			
-			try { 
+			try {
 				$data = $this->_API->sendRequest($api_params); 
 			} catch( Exception $e ) {
 				#catch any exceptions and report the problem
 				@ErrorHandling::APIException('depo:insert', $data, $api_params, $e, $this->params);
-			} 
-
+			}
+			
 			$this->params['page_title'] = $this->params['insert_a_depositor_text'];
 			$str = View::render('depositor_insert/success', $this->params, true);
 			$this->render($str);
@@ -244,21 +244,20 @@ class DepositorController extends AbstractController {
 			$this->render($str);
 		}
 	}
-
+	
 	public function updateAction() {
 		if(empty($this->params['id'])) {
 			$str = View::render('depositor_update/noid', $this->params, true);
 			$this->render($str);
 			exit();
 		}
-
+		
 		$this->params['page_title'] = $this->params['update_depositor_data_text'];
-
+		
 		$this->params['depositor'] = $this->get_depositor();
 		$str = View::render('depositor_update/main', $this->params, true);
 		$this->render($str);
 	}
-
 }
 
 ?>
