@@ -74,7 +74,7 @@ class DepositorController {
 		$values = 
 			@array(
 				':birth_place'    =>   $this->_params['birth_place'],
-				':birth_date'     =>   $this->_params['birth_date'],
+				':birth_date'     =>   'STR_TO_DATE(\''.$this->_params['birth_date'].'\', \'%d/$m/%Y\')',
 				':sex'            =>   $this->_params['sex'],
 				':adress'         =>   $this->_params['street'].' '.$this->_params['civic'],
 				':document'       =>   $this->_params['document'],
