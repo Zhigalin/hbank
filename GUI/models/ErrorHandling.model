@@ -3,26 +3,26 @@
 class ErrorHandling {
 
 	static public function APIException($point, $data, $api_params, $exception, $params_array) {
-		@ob_start();
-		@echo 'Error occurred. Time:'.date('d.m.Y H:i:s');
-		@echo ' Error point: '.$point.'. Error data: ';
-		@echo $exception->getMessage()."\n";
-		@echo ' Trace($data):'."\n";
-		@var_dump($data)."\n";
-		@echo ' Trace(API params):'."\n";
-		@var_dump($api_params)."\n";
-		@echo ' Trace(errot object):'."\n";
-		@var_dump($exception)."\n";
-		@echo ' ========== '."\n \n \n";
-		@$error  = ob_get_contents();
-		@ob_end_clean();
-		@$log    = fopen($params_array['error_log_file_path'], 'a+');
-		@fwrite($log, $error);
-		@fclose($log);
-		@View::render('header', $params_array);
-		@View::render('unknown_error', $params_array);
-		@View::render('footer', $params_array);
-		@exit();
+		ob_start();
+		echo 'Error occurred. Time:'.date('d.m.Y H:i:s');
+		echo ' Error point: '.$point.'. Error data: ';
+		echo $exception->getMessage()."\n";
+		echo ' Trace($data):'."\n";
+		var_dump($data)."\n";
+		echo ' Trace(API params):'."\n";
+		var_dump($api_params)."\n";
+		echo ' Trace(errot object):'."\n";
+		var_dump($exception)."\n";
+		echo ' ========== '."\n \n \n";
+		$error  = ob_get_contents();
+		ob_end_clean();
+		$log    = fopen($params_array['error_log_file_path'], 'a+');
+		fwrite($log, $error);
+		fclose($log);
+		View::render('header', $params_array);
+		View::render('unknown_error', $params_array);
+		View::render('footer', $params_array);
+		exit();
 	}
 }
 

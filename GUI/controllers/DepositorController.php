@@ -170,7 +170,7 @@ class DepositorController extends AbstractController {
 			$data = $this->_API->sendRequest($api_params); 
 		}  catch( Exception $e ) {
 			#catch any exceptions and report the problem
-			@ErrorHandling::APIException('depo:create:2', $data, $api_params, $e, $this->params);
+			ErrorHandling::APIException('depo:create:2', $data, $api_params, $e, $this->params);
 		}
 		
 		$this->params['init_hours_num'] = $data['init_hours_num'];
