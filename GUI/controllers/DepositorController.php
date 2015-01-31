@@ -38,10 +38,12 @@ class DepositorController extends AbstractController {
 	}
 	
 	public function listAction() {
-		if($this->params['searchfor'] === 'id') {
-			$this->params['id'] = $this->params['seachtext'];
-			$this->readAction();
-			exit();
+		if(isset($this->params['searchfor'])) {
+			if($this->params['searchfor'] === 'id') {
+				$this->params['id'] = $this->params['seachtext'];
+				$this->readAction();
+				exit();
+			}
 		}
 		
 		$this->params['page_title'] = $this->params['members_list_text'];
