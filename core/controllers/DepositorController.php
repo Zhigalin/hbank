@@ -150,15 +150,9 @@ class DepositorController {
 	public function readAction() {
 		$data = array();
 
-		$query = 'SELECT * FROM depositors WHERE `depositor no.` = :id UNION SELECT * FROM other_data WHERE `depositor no.` = :id';
+		$query = 'SELECT * FROM depositors, other_data WHERE `depositor no.` = '.$this->_params['id'];
 
-		$prep =
-			array(
-				':id'        =>   $this->_params['id']
-			)
-		;
-
-		if ($data = DB::execPrep($query, $prep)) {
+		if ($data = DB::exec($query)) {
 			$data['result'] = $data[0];
 			$data['success'] = true;
 			return $data;
