@@ -40,6 +40,8 @@
 					<ul class='org_cat'>
 						<li><a href='<?=$search_depositors_url?>' class='expan'><?=$depositors_text?></a></li>
 						<li><a href='#' class='expan'><?=$transactions_text?></a></li>
+						<li><a href='#' class='expan'><?=$activities_text?></a></li>
+						<li><a href='#' class='expan'><?=$classes_text?></a></li>
 					</ul>
 				</div>
 			</div>
@@ -48,6 +50,8 @@
 					<ul class='org_cat'>
 						<li><a href='<?=$create_depositors_url?>' class='expan'><?=$member_text?></a></li>
 						<li><a href='#' class='expan'><?=$transaction_text?></a></li>
+						<li><a href='#' class='expan'><?=$activity_text?></a></li>
+						<li><a href='#' class='expan'><?=$class_text?></a></li>
 					</ul>
 				</div>
 			</div>
