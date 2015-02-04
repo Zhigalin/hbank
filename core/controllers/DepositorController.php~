@@ -24,11 +24,11 @@ class DepositorController {
 			array(
 				':name'        =>   ucfirst(strtolower($this->_params['name'])),
 				':surname'     =>   ucfirst(strtolower($this->_params['surname'])),
-				':mobile'      =>   $this->_params['mobile'],
-				':telephone'   =>   $this->_params['telephone'],
-				':email'       =>   strtolower($this->_params['email']),
-				':state'       =>   $this->_params['state'] === 'unactive' ? 'unactive' : 'active',
-				':hours'       =>   $this->_params['hours']
+				':mobile'      =>                      $this->_params['mobile'],
+				':telephone'   =>                      $this->_params['telephone'],
+				':email'       =>           strtolower($this->_params['email']),
+				':state'       =>                      $this->_params['state'] === 'unactive' ? 'unactive' : 'active',
+				':hours'       =>                      $this->_params['hours']
 			)
 		;
 
