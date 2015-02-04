@@ -71,7 +71,7 @@ var_dump($values);
 
 		$query = "INSERT INTO `other_data` (`place of birth`, `date of birth`, `sex`, `adress`, `city`, `province`, `document`, `document type`, `profession`, `degree`, `channel`, `other associations`, `notes`) ";
 		$query .= "VALUES (:birth_place, STR_TO_DATE(:birth_date, '%d/%m/%Y'), :sex, :adress, :city, :province :document, :document_type, :profession, :degree, :info_from, :associations, :notes)";
-		$values =
+		$values2 =
 			@array(
 				':birth_place'    =>   ucfirst(strtolower($this->_params['birth_place'])),
 				':birth_date'     =>                      $this->_params['birth_date'],
@@ -88,8 +88,8 @@ var_dump($values);
 				':notes'          =>                      $this->_params['notes']
 			)
 		;
-
- 		if(DB::insert($query, $values) === true) {
+var_dump($values2);
+ 		if(DB::insert($query, $values2) === true) {
 			$data['success'] = true;
 		} else {
 			$data['success'] = false;
