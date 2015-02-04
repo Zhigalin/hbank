@@ -24,11 +24,11 @@ class DepositorController {
 			array(
 				':name'        =>   ucfirst(strtolower($this->_params['name'])),
 				':surname'     =>   ucfirst(strtolower($this->_params['surname'])),
-				':mobile'      =>   $this->_params['mobile'],
-				':telephone'   =>   $this->_params['telephone'],
-				':email'       =>   strtolower($this->_params['email']),
-				':state'       =>   $this->_params['state'] === 'unactive' ? 'unactive' : 'active',
-				':hours'       =>   $this->_params['hours']
+				':mobile'      =>                      $this->_params['mobile'],
+				':telephone'   =>                      $this->_params['telephone'],
+				':email'       =>           strtolower($this->_params['email']),
+				':state'       =>                      $this->_params['state'] === 'unactive' ? 'unactive' : 'active',
+				':hours'       =>                      $this->_params['hours']
 			)
 		;
 
@@ -73,19 +73,19 @@ class DepositorController {
 		$query .= "VALUES (:birth_place, STR_TO_DATE(:birth_date, '%d/%m/%Y'), :sex, :adress, :city, :province :document, :document_type, :profession, :degree, :info_from, :associations, :notes)";
 		$values =
 			@array(
-				':birth_place'    =>   $this->_params['birth_place'],
-				':birth_date'     =>   $this->_params['birth_date'],
-				':sex'            =>   $this->_params['sex'],
-				':adress'         =>   $this->_params['street'].' '.$this->_params['civic'],
+				':birth_place'    =>   ucfirst(strtolower($this->_params['birth_place'])),
+				':birth_date'     =>                      $this->_params['birth_date'],
+				':sex'            =>                      $this->_params['sex'],
+				':adress'         =>                      $this->_params['street'].' '.$this->_params['civic'],
 				':city'           =>   ucfirst(strtolower($this->_params['city'])),
-				':province'       =>   strtoupper($this->_params['province']),
-				':document'       =>   $this->_params['document'],
-				':document_type'  =>   $this->_params['document_type'],
+				':province'       =>           strtoupper($this->_params['province']),
+				':document'       =>           strtoupper($this->_params['document']),
+				':document_type'  =>                      $this->_params['document_type'],
 				':profession'     =>   ucfirst(strtolower($this->_params['profession'])),
 				':degree'         =>   ucfirst(strtolower($this->_params['degree'])),
-				':info_from'      =>   $this->_params['info_from'],
-				':associations'   =>   $this->_params['associations'],
-				':notes'          =>   $this->_params['notes']
+				':info_from'      =>                      $this->_params['info_from'],
+				':associations'   =>                      $this->_params['associations'],
+				':notes'          =>                      $this->_params['notes']
 			)
 		;
 
