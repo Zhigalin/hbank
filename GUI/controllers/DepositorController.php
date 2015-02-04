@@ -243,7 +243,7 @@ class DepositorController extends AbstractController {
 			  !empty($this->params['index']) &&
 			  !empty($this->params['email']) &&
 			  !empty($this->params['mobile']) &&
-			  !empty($this->params['state']) &&
+			  !empty($this->params['state'])
 			) {
 
 			$api_params
