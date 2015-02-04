@@ -145,7 +145,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label"><?=$init_hours_num_text?></label>
 				<div class="col-sm-1">
-					<input type="text" class="form-control" name="hours" placeholder="<?=$init_hours_num?>">
+					<input type="text" class="form-control" name="hours" value="<?=$init_hours_num?>">
 				</div>
 			</div>
 			<div class="form-group">
