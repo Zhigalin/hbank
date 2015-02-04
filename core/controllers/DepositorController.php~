@@ -50,6 +50,7 @@ class DepositorController {
 		#    street             (string)                                             #
 		#    civic              (string)                                             #
 		#    city               (string)                          required           #
+		#    province           (2 chars)                         required           #
 		#    index              (number)                          required           #
 		#    email              (*@*)(string)                     required           #
 		#    mobile             (telephone)                       required           #
@@ -65,7 +66,6 @@ class DepositorController {
 		#    notes              (string)                                             #
 		#    state              (active/unactive)                 required           #
 		#                                                                            #
-		#     *: depends of the bank settings, however the standart is 5 hours PP    #
 		##############################################################################
 
 

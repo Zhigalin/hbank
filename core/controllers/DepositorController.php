@@ -78,7 +78,7 @@ class DepositorController {
 				':sex'            =>   $this->_params['sex'],
 				':adress'         =>   $this->_params['street'].' '.$this->_params['civic'],
 				':city'           =>   ucfirst(strtolower($this->_params['city'])),
-				':province'       =>   $this->_params['province'],
+				':province'       =>   strtoupper($this->_params['province']),
 				':document'       =>   $this->_params['document'],
 				':document_type'  =>   $this->_params['document_type'],
 				':profession'     =>   ucfirst(strtolower($this->_params['profession'])),
