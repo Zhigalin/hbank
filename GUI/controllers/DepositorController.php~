@@ -262,6 +262,7 @@ class DepositorController extends AbstractController {
 					'street'         => $this->params['street'],
 					'civic'          => $this->params['civic'],
 					'city'           => $this->params['city'],
+					'province'       => $this->params['province'],
 					'index'          => $this->params['index'],
 					'email'          => $this->params['email'],
 					'mobile'         => $this->params['mobile'],
@@ -273,7 +274,6 @@ class DepositorController extends AbstractController {
 					'info_from'      => $this->params['info_from'],
 					'associations'   => $this->params['associations'],
 					'state'          => $this->params['state'],
-					'available'      => $this->params['available'],
 					'hours'          => $this->params['hours'],
 					'notes'          => $this->params['notes']
 				)

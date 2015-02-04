@@ -37,19 +37,19 @@ CREATE TABLE bdt.depositors (
 CREATE TABLE bdt.other_data (
 	`depositor no.`      mediumint UNSIGNED NOT NULL  AUTO_INCREMENT,
 	`sex`                  set('m','f')   NOT NULL  ,
-	`date of birth`      date  NOT NULL  ,
-	`place of birth`     tinytext  NOT NULL  ,
+	`date of birth`        date  NOT NULL  ,
+	`place of birth`       tinytext  NOT NULL  ,
 	`adress`               longtext    ,
-	`city`                 tinytext    ,
+	`city`                 varchar(20)  NOT NULL  ,
 	`index`                mediumint    ,
-	`province code`        varchar(2)    ,
+	`province`        varchar(2)    ,
 	`document`             varchar(200)   ,
 	`document type`        tinytext    ,
-	`profession`           tinytext    ,
-	`qualification`        tinytext    ,
+	`profession`           varchar(30)    ,
+	`degree`               varchar(20)    ,
 	`notes`                longtext    ,
-	`channel`              tinytext    ,
-	`other associations` mediumtext    ,
+	`channel`              varchar(20)    ,
+	`other associations`   tinytext    ,
 	CONSTRAINT `pk_dati aggiuntivi` PRIMARY KEY ( `depositor no.` )
  ) engine=InnoDB
 

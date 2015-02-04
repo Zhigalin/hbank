@@ -44,6 +44,7 @@ $_LANG['address_text']                                                  = 'Indir
 $_LANG['street_text']                                                   = 'Via, Piazza, etc.';
 $_LANG['civic_text']                                                    = 'Civico';
 $_LANG['city_text']                                                     = 'Città';
+$_LANG['province_text']                                                 = 'Codice Provincia';
 $_LANG['index_text']                                                    = 'CAP';
 $_LANG['contacts_text']                                                 = 'Contatti';
 $_LANG['mobile_text']                                                   = 'Cellulare';
