@@ -50,8 +50,8 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label"></label>
 				<div style="display: flex; padding-right: 11px;" class="col-sm-10">
-					<input style="display: inline-block; width: 65%;" class="form-control" name="city" placeholder="<?=$city_text?>" type="text" required>
-					<input style="display: inline-block; width: 9%;" class="form-control" name="province" placeholder="<?=$province_text?>" type="text" required>
+					<input style="display: inline-block; width: 55%;" class="form-control" name="city" placeholder="<?=$city_text?>" type="text" required>
+					<input style="display: inline-block; width: 19%; margin-left: 5px;" class="form-control" name="province" placeholder="<?=$province_text?>" type="text" required>
 					<input style="display: inline-block; width: 25%; align-self: flex-end; margin-left: 5px;" class="form-control" name="index" placeholder="<?=$index_text?>" type="number" required>
 				</div>
 			</div>
