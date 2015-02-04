@@ -31,7 +31,7 @@ class DepositorController {
 				':hours'       =>                      $this->_params['hours']
 			)
 		;
-
+var_dump($values);
 		if(DB::insert($query, $values) === true) {
 			$data['success'] = true;
 		} else {
