@@ -2,7 +2,7 @@
 	<div class="panel-heading">
 		<h3 class="panel-title"><?=$insert_a_depositor_text?></h3>
 	</div>
-	<div class="panel-body">
+	<div class="panel-body">	
 		<form class="form-horizontal" role="form" action="<?=$insert_depositors_url?>" method="GET">
 			<input type="hidden" name="controller" value="depositor">
 			<input type="hidden" name="action" value="insert">
@@ -34,7 +34,7 @@
 					<label class="btn btn-default">
 						<input type="radio" name="sex" value="m" required> <?=$male_char_text?>
 					</label>
-					<label class="btn btn-default">
+					<label class="btn btn-default"> 
 						<input type="radio" name="sex" value="f" required> <?=$female_char_text?>
 					</label>
 				</div>
@@ -72,15 +72,15 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label"><?=$document_text?></label>
 				<div style="display: flex; padding-right: 11px;" class="col-sm-10">
-					<input style="display: inline-block; width: 40%; margin-right: 15px;" class="form-control" name="document" placeholder="<?=$document_no_text?>" type="text">
+					<input style="display: inline-block; width: 40%; margin-right: 15px;" class="form-control" name="document" placeholder="<?=$document_no_text?>" type="text" required>
  					<label class="radio-inline">
-  						<input type="radio" name="document_type" value="id"> <?=$id_card_text?>
+  						<input type="radio" name="document_type" value="id" required> <?=$id_card_text?>
 					</label>
 					<label class="radio-inline">
-  						<input type="radio" name="document_type" value="drivers_license"> <?=$drivers_license_text?>
+  						<input type="radio" name="document_type" value="drivers_license" required> <?=$drivers_license_text?>
 					</label>
 					<label class="radio-inline">
-  						<input type="radio" name="document_type" value="passport"> <?=$passport_text?>
+  						<input type="radio" name="document_type" value="passport" required> <?=$passport_text?>
 					</label>
 				</div>
 			</div>
@@ -137,6 +137,18 @@
 					</label>
 					<label class="btn btn-default">
 						<input type="radio" name="state" value="unactive" required> <?=$not_active_field_text?>
+					</label>
+				</div>
+			</div>
+			<br>
+			<div class="form-group">
+				<label class="col-sm-2 control-label"><?=$available_for_bank_text?></label>
+				<div class="btn-group" data-toggle="buttons">
+					<label class="btn btn-default">
+						<input type="radio" name="available" value="true" required> <?=$yes_text?>
+					</label>
+					<label class="btn btn-default">
+						<input type="radio" name="available" value="false" required> <?=$no_text?>
 					</label>
 				</div>
 			</div>
