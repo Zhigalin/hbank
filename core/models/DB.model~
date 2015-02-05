@@ -4,20 +4,20 @@
 
 class DB {
 	static $connection;
-	
+
 	static function init() {
 		global $_SETTINGS;
-		
+
 		$host     = $_SETTINGS['database']['host'];
 		$dbname   = $_SETTINGS['database']['name'];
 		$user     = $_SETTINGS['database']['user'];
 		$pass     = $_SETTINGS['database']['pass'];
-		
+
 		self::$connection = new PDO('mysql:host='.$host.';dbname='.$dbname, $user, $pass, array(PDO::ATTR_PERSISTENT => true));
 		self::$connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 		self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
-	
+
 	static function execPrep($query, $prep) {
 		$PDOStatementObject = self::$connection->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		if ($PDOStatementObject->execute($prep)===true) {
@@ -48,9 +48,10 @@ class DB {
 		}
 	}
 
-	
+
 	static function insert($query, $prep) {
 		$PDOStatementObject = self::$connection->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+		var_dump($PDOStatementObject);#debug
 		return $PDOStatementObject->execute($prep);
 	}
 }

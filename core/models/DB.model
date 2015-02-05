@@ -15,7 +15,7 @@ class DB {
 
 		self::$connection = new PDO('mysql:host='.$host.';dbname='.$dbname, $user, $pass, array(PDO::ATTR_PERSISTENT => true));
 		self::$connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-		self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	}
 
 	static function execPrep($query, $prep) {
