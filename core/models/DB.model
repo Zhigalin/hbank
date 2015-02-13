@@ -1,6 +1,6 @@
 <?php
 
-### A PDO Wrapper, ver 0.6 ###
+### A PDO Wrapper, ver 1.2 ###
 
 class DB {
 	static $connection;
@@ -51,7 +51,6 @@ class DB {
 
 	static function insert($query, $prep) {
 		$PDOStatementObject = self::$connection->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-		var_dump($PDOStatementObject);#debug
 		return $PDOStatementObject->execute($prep);
 	}
 }

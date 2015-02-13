@@ -1,6 +1,6 @@
 <?php
 
-### An API Caller file for calling the core API rev 1.2 ###
+### An API Caller file for calling the core API rev 1.2.1 ###
 
 class ApiCaller {
 	#some variables for the object
@@ -38,10 +38,10 @@ class ApiCaller {
 
 		#execute the request
 		$result = curl_exec($ch);
-		var_dump($result);#                      DEBUG
-		#json_decode the result
+
+		#decode the result
 		$result = json_decode($result, true);
-		print_r($result);#                       DEBUG
+
 
 		#check if we're able to json_decode the result correctly
 		if( $result == false || isset($result['success']) == false ) {

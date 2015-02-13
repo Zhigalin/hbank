@@ -33,55 +33,7 @@ class DepositorController extends AbstractController {
 
 		$this->params['depositor'] = $this->get_depositor();
 		var_dump($this->params['depositor']);
-//output example:
-// array(23) {
-//   ["depositor no."]=>
-//   		string(1) "2"
-//   ["name"]=>
-//   		string(9) "Francesca"
-//   ["surname"]=>
-//   		string(8) "Sgarlata"
-//   ["mobile"]=>
-//   		string(13) "347 53 79 131"
-//   ["telephone"]=>
-//   		string(13) "019 45 20 066"
-//   ["email"]=>
-//   		string(20) "arancesca@tiscali.it"
-//   ["state"]=>
-//   		string(8) "unactive"
-//   ["hours no."]=>
-//   		string(1) "0"
-//   ["sex"]=>
-//   		string(1) "f"
-//   ["date of birth"]=>
-//   		string(10) "1970-02-07"
-//   ["place of birth"]=>
-//   		string(6) "Savona"
-//   ["adress"]=>
-//   		string(16) "via Torino 42-10"
-//   ["city"]=>
-//   		NULL
-//   ["index"]=>
-//   		NULL
-//   ["province code"]=>
-//   		NULL
-//   ["document"]=>
-//   		string(5) "NODOC"
-//   ["document type"]=>
-//   		string(2) "id"
-//   ["profession"]=>
-//   		string(23) "Impiegata amministratva"
-//   ["degree"]=>
-//   		string(6) "Laurea"
-//   ["notes"]=>
-//   		string(0) ""
-//   ["channel"]=>
-//   		NULL
-//   ["other associations"]=>
-//   		string(0) ""
-//   ["availability for bank"]=>
-//   		string(1) "0"
-// }
+
 		$str = View::render('depositor_read/main', $this->params, true);
 		$this->render($str);
 	}

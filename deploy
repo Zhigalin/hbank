@@ -1,4 +1,4 @@
-!# /bin/sh
+#! /bin/bash
 for file in *;
 	do curl -T $file ftp://5146013%40aruba.it:bdtsavona2012@ftp.bancadeltempo-sv.it//www.bancadeltempo-sv.it/software/$file;
 done;
