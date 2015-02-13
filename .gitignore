@@ -8,3 +8,5 @@
 *.sublime-project
 #file manager's config for this directory
 .directory
+#dolphin connection
+server
