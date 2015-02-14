@@ -34,7 +34,7 @@
 					<label class="btn btn-default btn-primary">
 						<?=$male_char_text?>
 					</label>
-					<label class="btn btn-default"> 
+					<label class="btn btn-default">
 						<?=$female_char_text?>
 					</label>
 				</div>
@@ -81,10 +81,10 @@
 						<label class="btn btn-default btn-primary">
 							<?=$id_card_text?>
 						</label>
-						<label class="btn btn-default"> 
+						<label class="btn btn-default">
 							<?=$drivers_license_text?>
 						</label>
-						<label class="btn btn-default"> 
+						<label class="btn btn-default">
 							<?=$passport_text?>
 						</label>
 					</div>
@@ -138,18 +138,6 @@
 					</label>
 					<label class="btn btn-default">
 						<?=$not_active_field_text?>
-					</label>
-				</div>
-			</div>
-			<br>
-			<div class="form-group">
-				<label class="col-sm-2 control-label"><?=$available_for_bank_text?></label>
-				<div class="btn-group" >
-					<label class="btn btn-default btn-primary">
-						<?=$yes_text?>
-					</label>
-					<label class="btn btn-default">
-						<?=$no_text?>
 					</label>
 				</div>
 			</div>

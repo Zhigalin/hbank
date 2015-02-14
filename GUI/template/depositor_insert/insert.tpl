@@ -73,7 +73,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label"><?=$document_text?></label>
 				<div style="display: flex; padding-right: 11px;" class="col-sm-10">
-					<input style="display: inline-block; width: 40%; margin-right: 15px;" class="form-control" name="document" placeholder="<?=$document_no_text?>" type="text">
+					<input style="display: inline-block; width: 40%; margin-right: 15px;" class="form-control" name="document" placeholder="<?=$notrequired_text?>" type="text">
  					<label class="radio-inline">
   						<input type="radio" name="document_type" value="id"> <?=$id_card_text?>
 					</label>
