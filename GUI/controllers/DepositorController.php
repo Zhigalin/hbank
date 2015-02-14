@@ -32,7 +32,6 @@ class DepositorController extends AbstractController {
 		$this->params['page_title'] = $this->params['depositor_data_text'];
 
 		$this->params['depositor'] = $this->get_depositor();
-		var_dump($this->params['depositor']);
 
 		$str = View::render('depositor_read/main', $this->params, true);
 		$this->render($str);

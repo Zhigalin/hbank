@@ -71,7 +71,7 @@ class DepositorController {
 
 		$query = "INSERT INTO `other_data` (`place of birth`, `date of birth`, `sex`, `adress`, `city`, `province`, `document`, `document type`, `profession`, `degree`, `channel`, `other associations`, `notes`) ";
 		$query .= "VALUES (:birth_place, STR_TO_DATE(:birth_date, '%d/%m/%Y'), :sex, :adress, :city, :province, :document, :document_type, :profession, :degree, :info_from, :associations, :notes)";
-		$values2 =
+		$values =
 			@array(
 				':birth_place'    =>   ucfirst(strtolower($this->_params['birth_place'])),
 				':birth_date'     =>                      $this->_params['birth_date'],
@@ -89,7 +89,7 @@ class DepositorController {
 			)
 		;
 
-		if(DB::insert($query, $values2) === true) {
+		if(DB::insert($query, $values) === true) {
 			$data['success'] = true;
 		} else {
 			$data['success'] = false;
@@ -151,7 +151,7 @@ class DepositorController {
 	public function readAction() {
 		$data = array();
 
-		$query = 'SELECT * FROM depositors, other_data WHERE depositors.`depositor no.` = '.$this->_params['id'];
+		$query = 'SELECT * FROM depositors, other_data WHERE depositors.`depositor no.` = '.$this->_params['id'].' AND other_data.`depositor no.` = '.$this->_params['id'];
 
 		if ($data = DB::exec($query)) {
 			$data['result'] = $data[0];
