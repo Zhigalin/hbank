@@ -1,4 +1,16 @@
-#! /bin/bash
-for file in *;
-	do curl -T $file ftp://5146013%40aruba.it:bdtsavona2012@ftp.bancadeltempo-sv.it//www.bancadeltempo-sv.it/software/$file;
-done;
+#!/bin/bash
+#   $file ftp://5146013%40aruba.it:bdtsavona2012@ftp.bancadeltempo-sv.it//www.bancadeltempo-sv.it/software/$file;
+
+deploy() {
+	local dir="$1"
+	local path="$2"
+	for file in $(ls $dir); do
+		if [ -d "${path}${file}" ]; then
+			deploy "${path}${file}" "${path}${file}/"
+		elif [ -f "${path}${file}" ]; then
+			curl -# --ftp-create-dirs -T "${path}${file}" ftp://5146013%40aruba.it:bdtsavona2012@ftp.bancadeltempo-sv.it//www.bancadeltempo-sv.it/software/"${path}${file}";
+		fi
+	done;
+}
+
+deploy .
