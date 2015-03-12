@@ -5,8 +5,7 @@
 class DepositorController {
 	private $_params;
 
-	public function __construct($params)
-	{
+	public function __construct($params) {
 		$this->_params = $params;
 
 		try {
@@ -38,36 +37,6 @@ class DepositorController {
 			$data['success'] = false;
 			return $data;
 		}
-
-		##############################################################################
-		#                               Fields:                                      #
-		#                                                                            #
-		#    name               (string)                          required           #
-		#    surname            (string)                          required           #
-		#    birth_place        (string)                          required           #
-		#    birth_date         (date)                            required           #
-		#    sex                (m/f)                             required           #
-		#    street             (string)                                             #
-		#    civic              (string)                                             #
-		#    city               (string)                          required           #
-		#    province           (2 chars)                         required           #
-		#    index              (number)                          required           #
-		#    email              (*@*)(string)                     required           #
-		#    mobile             (telephone)                       required           #
-		#    telephone          (telephone)                                          #
-		#    document           (string)                          required           #
-		#    document_type      (id/drivers_license/passport)     required           #
-		#    profession         (string)                                             #
-		#    degree             (string)                                             #
-		#    info_from          (leaflet/internet/word_of_mouth/demonstration)       #
-		#    associations       (string)                                             #
-		#    available          (boolean)                         required           #
-		#    hours              (number)                          default 5*         #
-		#    notes              (string)                                             #
-		#    state              (active/unactive)                 required           #
-		#                                                                            #
-		##############################################################################
-
 
 		$query = "INSERT INTO `other_data` (`place of birth`, `date of birth`, `sex`, `adress`, `city`, `province`, `document`, `document type`, `profession`, `degree`, `channel`, `other associations`, `notes`) ";
 		$query .= "VALUES (:birth_place, STR_TO_DATE(:birth_date, '%d/%m/%Y'), :sex, :adress, :city, :province, :document, :document_type, :profession, :degree, :info_from, :associations, :notes)";
