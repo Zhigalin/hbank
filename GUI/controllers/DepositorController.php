@@ -74,42 +74,6 @@ class DepositorController extends AbstractController {
 			@ErrorHandling::APIException('depo:list', $data, $api_params, $e, $this->params);
 		}
 
-		#result array example
-		// Array
-		// (
-		// 	[pages] => 0.1
-		// 	[page] => 1
-		// 	[success] => 1
-		// 	[result] => Array
-		// 		(
-		// 			[0] => Array
-		// 				(
-		// 					[depositor no.] => 2
-		// 					[name] => Mario
-		// 					[surname] => Rossi
-		// 					[mobile] => %2B39 380 75 00 40
-		// 					[telephone] => 34 25 54
-		// 					[email] => pinco%40pallo.it
-		// 					[state] => unactive
-		// 					[hours no.] => 6
-		// 				)
-
-		// 			[1] => Array
-		// 				(
-		// 					[depositor no.] => 1
-		// 					[name] => Banca
-		// 					[surname] => Del Tempo
-		// 					[mobile] => 0000
-		// 					[telephone] => 0000
-		// 					[email] => info@bancadeltempo-sv.it
-		// 					[state] => active
-		// 					[hours no.] => 1000000000
-		// 				)
-
-		// 		)
-
-		// )
-
 		if (!empty($data['result'])) {
 			foreach ($data['result'] as $d) {
 				$col = function(&$str, $params, $field) {
