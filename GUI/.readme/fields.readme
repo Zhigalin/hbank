@@ -1,25 +1,23 @@
-
-                               Fields:                                                                                                                  
-    name               (string)                          required           
-    surname            (string)                          required           
-    birth_place        (string)                          required           
-    birth_date         (date)                            required           
-    sex                (m/f)                             required           
-    street             (string)                                             
-    civic              (string)                                             
-    city               (string)                          required           
-    province           (2 chars)                         required           
-    index              (number)                          required           
-    email              (*@*)(string)                     required           
-    mobile             (telephone)                       required           
-    telephone          (telephone)                                          
-    document           (string)                          required           
-    document_type      (id/drivers_license/passport)     required           
-    profession         (string)                                             
-    degree             (string)                                             
-    info_from          (leaflet/internet/word_of_mouth/demonstration)       
-    associations       (string)                                             
-    available          (boolean)                         required           
-    hours              (number)                          default 5*         
-    notes              (string)                                             
-    state              (active/unactive)                 required           
+                               Fields:
+    name               (string)                          required
+    surname            (string)                          required
+    birth_place        (string)                          required
+    birth_date         (date)                            required
+    sex                (m/f)                             required
+    street             (string)
+    civic              (string)
+    city               (string)                          required
+    province           (2 chars)                         required
+    index              (number)                          required
+    email              (*@*)(string)                     required
+    mobile             (telephone)                       required
+    telephone          (telephone)
+    document           (string)
+    document_type      (id/drivers_license/passport)
+    profession         (string)
+    degree             (string)
+    info_from          (leaflet/internet/word_of_mouth/demonstration)
+    associations       (string)
+    hours              (number)                          default 5*
+    notes              (string)
+    state              (active/unactive)                 required
