@@ -8,6 +8,8 @@
 *swp.*
 .*.kate-swp
 .swp.*
+.kateproject
+.kateproject.d/
 #backup directory
 .bak/
 #sublime text
