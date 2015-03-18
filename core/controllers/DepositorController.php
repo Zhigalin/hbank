@@ -38,14 +38,15 @@ class DepositorController {
 			return $data;
 		}
 
-		$query = "INSERT INTO `other_data` (`place of birth`, `date of birth`, `sex`, `adress`, `city`, `province`, `document`, `document type`, `profession`, `degree`, `channel`, `other associations`, `notes`) ";
-		$query .= "VALUES (:birth_place, STR_TO_DATE(:birth_date, '%d/%m/%Y'), :sex, :adress, :city, :province, :document, :document_type, :profession, :degree, :info_from, :associations, :notes)";
+		$query = "INSERT INTO `other_data` (`place of birth`, `date of birth`, `sex`, `adress`, `index`, `city`, `province`, `document`, `document type`, `profession`, `degree`, `channel`, `other associations`, `notes`) ";
+		$query .= "VALUES (:birth_place, STR_TO_DATE(:birth_date, '%d/%m/%Y'), :sex, :adress, :index, :city, :province, :document, :document_type, :profession, :degree, :info_from, :associations, :notes)";
 		$values =
 			@array(
 				':birth_place'    =>   ucfirst(strtolower($this->_params['birth_place'])),
 				':birth_date'     =>                      $this->_params['birth_date'],
 				':sex'            =>                      $this->_params['sex'],
 				':adress'         =>                      $this->_params['street'].' '.$this->_params['civic'],
+				':index'            =>                    $this->_params['index'],
 				':city'           =>   ucfirst(strtolower($this->_params['city'])),
 				':province'       =>           strtoupper($this->_params['province']),
 				':document'       =>           strtoupper($this->_params['document']),
