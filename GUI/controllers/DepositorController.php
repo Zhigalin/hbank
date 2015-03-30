@@ -91,36 +91,40 @@ class DepositorController extends AbstractController {
 				$col ($str, $this->params, urldecode($d['email']));
 				$col ($str, $this->params, urldecode($d['hours no.']));
 				$col ($str, $this->params, urldecode($d['state']));
-
+				
 				$this->params['depositor_id'] = $d['depositor no.'];
 				$col ($str, $this->params, View::render('depositors_table/button', $this->params, true)); #details button
-
+				
 				$str .= View::render('depositors_table/row_end', $this->params, true);
 			}
 		} else {
 			$str .= View::render('depositors_table/nodata', $this->params, true);
 		}
-
+		
 		$str .= View::render('depositors_table/table_footer', $this->params, true);
-
+		
 		if ($data['pages'] > 1) {
-
-			$url = $_SERVER['QUERY_STRING'].'page=1';
-			$page_url = $_SERVER['QUERY_STRING'].'page=';
-
+			
+			$url = 'index.php?'.$_SERVER['QUERY_STRING'].'&page=1';
+			$page_url = 'index.php?'.$_SERVER['QUERY_STRING'].'&page=';
+			
+			if(empty($this->params['perpage'])) {
+				$this->params['perpage'] = 20;
+			}
+			
 			Pagination::set($this->params, $data['page'], $data['pages'], $this->params['perpage'], $url, $page_url);
-
+			
 			$str .= Pagination::display();
 		}
-
+		
 		$this->render($str);
 	}
-
+	
 	public function createAction() {
 		$this->params['page_title'] = $this->params['insert_a_depositor_text'];
-
+		
 		$api_params = array ('controller' => 'depositor', 'action' => 'getlastnum');
-
+		
 		try {
 			$data = $this->_API->sendRequest($api_params);
 		}  catch( Exception $e ) {
