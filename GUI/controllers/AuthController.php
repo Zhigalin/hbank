@@ -41,7 +41,7 @@ class AuthController extends AbstractController {
 			}
 		} elseif (isset($_SESSION['password'])) {
 			if ($_OPERATORS[$_SESSION['email']] === $_SESSION['password']) {
-				if(@$this->params['exaction']!=='create' && @$this->params['exaction']!=='update' && @$this->params['exaction']!=='delete') {
+				if(@$this->params['exaction']!=='insert' && @$this->params['exaction']!=='update' && @$this->params['exaction']!=='delete') {
 					header("Location: ".$_SERVER['HTTP_REFERER'],TRUE,302);
 				} else {
 					header("Location: index.php",TRUE,302);
