@@ -124,7 +124,7 @@
 			</div>
 			<br>
 			<div class="form-group">
-				<label class="col-sm-2 control-label"><?=$other_assotiations_text?></label>
+				<label class="col-sm-2 control-label"><?=$other_aassociations_text?></label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" name="associations" placeholder="<?=$notrequired_text?>">
 				</div>
