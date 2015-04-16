@@ -74,7 +74,7 @@
 			<br>
 			<? if(!empty($depositor['document'])) { ?>
 				<div class="form-group">
-					<label class="col-sm-2 control-label"><? if($depositor['document type']==='id') {echo $id_card_text} elseif($depositor['document type']==='passport') {echo $passport_text} else {echo $drivers_license_text}; echo ':'; ?></label>
+					<label class="col-sm-2 control-label"><? if($depositor['document type']==='id') {echo $id_card_text;} elseif($depositor['document type']==='passport') {echo $passport_text;} else {echo $drivers_license_text;} ?></label>
 					<div style="display: flex; padding-right: 11px;" class="col-sm-10">
 						<p style="display: inline-block; width: 40%; margin-right: 15px;" class="form-control-static"><b><?=$depositor['document']?></b></p>
 					</div>
@@ -104,16 +104,16 @@
 					<label class="col-sm-2 control-label"><?=$info_from_text?></label>
 					<div class="btn-group">
 						<label class="btn btn-default btn-primary">
-							<?=$leaflet_text?>
-						</label>
-						<label class="btn btn-default">
-							<?=$internet_text?>
-						</label>
-						<label class="btn btn-default">
-							<?=$word_of_mouth_text?>
-						</label>
-						<label class="btn btn-default">
-							<?=$demonstration_text?>
+							<?
+							if($depositor['channel']==='leaflet') 
+								{echo $leaflet_text;}
+							elseif($depositor['channel']==='internet')
+								{echo $internet_text;}
+							elseif($depositor['channel']==='word_of_mouth')
+								{echo $word_of_mouth_text;}
+							else
+								{echo $demonstration_text;}
+							?>
 						</label>
 					</div>
 				</div>
