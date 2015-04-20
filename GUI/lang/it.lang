@@ -75,6 +75,7 @@ $_LANG['no_text']                                                       = 'No';
 $_LANG['notes_text']                                                    = 'Note';
 $_LANG['init_hours_num_text']                                           = '№ ore iniziali';
 $_LANG['hours_num_text']                                                = '№ ore';
+$_LANG['num_text']                                                = '№';
 $_LANG['the_member_is_text']                                            = 'Il membro è:';
 $_LANG['wrong_mail_text']                                               = 'Email sbagliato!';
 $_LANG['wrong_password_text']                                           = 'Password sbagliato!';
@@ -86,7 +87,7 @@ $_LANG['return_text']                                                   = 'Ritor
 $_LANG['unknown_registred_error_text']                                  = 'Si è verificato un errore non riconosciuto. I detagli dell errore sono stati salvati nel apposito registro';
 $_LANG['contact_the_maintainer_text']                                   = 'Contatta l\'amministratore';
 $_LANG['details_text']                                                  = 'Dettagli';
-$_LANG['blank_field_text']                                              = 'Campo non compilato';
+$_LANG['blank_field_text']                                              = 'Campo obbligatorio non compilato';
 $_LANG['depositor_data_text']                                           = 'I dati del correntista';
 $_LANG['update_depositor_data_text']                                    = 'Aggiorna i dati del correntista';
 
