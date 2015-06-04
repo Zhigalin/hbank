@@ -10,6 +10,9 @@
 .swp.*
 .kateproject
 .kateproject.d/
+#KDevelop
+.kdev4/
+*.kdev4
 #backup directory
 .bak/
 #sublime text
