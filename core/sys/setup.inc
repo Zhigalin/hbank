@@ -7,6 +7,7 @@ ini_set('display_errors', 1);
 
 require 'sys/autoload.php';
 require 'controllers/BankController.php';
+require 'entities/Entities.php';
 
 spl_autoload_register('__autoload');
 
