@@ -1,27 +1,24 @@
 <?php
 
-class DepositorEntity {
-	protected $id;
-	
-	function __construct($id) {
+class DepositorEntity extends Entity {
+	public function bind($id) {
 		$this->id = $id;
 		
-		try {
-			DB::init();
-		} catch( Exception $e ) {
-			$data['success'] = false;
-			$data['errormsg'] = 'DB connection fault: '.$e->getMessage();
-			return $data;
+		$query = 'SELECT `depositor no.` FROM depositors WHERE `depositor no.` ='.$this->id;
+		if(DB::exec($query)) {
+			return true;
 		}
+		
+		return false;
 	}
 	
-	function isActive() {
+	public function isActive() {
 		$query = 'SELECT `state` FROM depositors WHERE `depositor no.` ='.$this->id;
 		$data = DB::exec($query);
 		return $data[0]==='active' ? true : false;
 	}
 	
-	function getHours() {
+	public function getHours() {
 		$query = 'SELECT `hours` FROM depositors WHERE `depositor no.` ='.$this->id;
 		$data = DB::exec($query);
 		return $data[0];
