@@ -1,15 +1,13 @@
 <?php
 
 class DepositorEntity extends Entity {
-	public function bind($id) {
+	public function __construct($id) {
 		$this->id = $id;
 		
 		$query = 'SELECT `depositor no.` FROM depositors WHERE `depositor no.` ='.$this->id;
-		if(DB::exec($query)) {
-			return true;
+		if(!DB::exec($query)) {
+			throw new DepositorNotExistsException;
 		}
-		
-		return false;
 	}
 	
 	public function isActive() {
