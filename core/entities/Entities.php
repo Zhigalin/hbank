@@ -11,11 +11,6 @@ class Entity {
 			exit();
 		}
 	}
-	
-	public function bind($id) {
-	}
 }
-
-require '*.entity';
 
 ?>

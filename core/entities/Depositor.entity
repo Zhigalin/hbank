@@ -1,7 +1,11 @@
 <?php
 
+/**
+ * @brief Get depositor as an entity and work on it
+ */
 class DepositorEntity extends Entity {
 	public function __construct($id) {
+		parent::__construct();
 		$this->id = $id;
 		
 		$query = 'SELECT `depositor no.` FROM depositors WHERE `depositor no.` ='.$this->id;
@@ -10,16 +14,56 @@ class DepositorEntity extends Entity {
 		}
 	}
 	
+/**
+ * @brief Is the depositor active?
+ * 
+ * @return bool
+ */
 	public function isActive() {
 		$query = 'SELECT `state` FROM depositors WHERE `depositor no.` ='.$this->id;
 		$data = DB::exec($query);
 		return $data[0]==='active' ? true : false;
 	}
 	
+/**
+ * @brief How many hours depositor have?
+ * 
+ * @return int hours number
+ */
 	public function getHours() {
 		$query = 'SELECT `hours` FROM depositors WHERE `depositor no.` ='.$this->id;
 		$data = DB::exec($query);
 		return $data[0];
+	}
+	
+/**
+ * @brief Set depositor hours, in absolute way
+ * 
+ * @param int $hours Absolute hours number
+ * @return void
+ */
+	public function setHours($hours) {//FIXME This is a stub, complete this function
+		$query = 'SET `hours` -> :hours FROM depositors WHERE `depositor no.` = :id';
+		$prep = array(
+			':hours' => $hours,
+			':id' => $this->id
+		);
+		DB::execPrep($query, $prep);
+	}
+	
+/**
+ * @brief Change (add or subtract) depositor hours, in relative way
+ * 
+ * @param int $hours Hours to add/subtract
+ * @return void
+ */
+	public function changeHours($hours) {//FIXME This is a stub, complete this function
+		$query = 'SET `hours` -> `hours` + :hours FROM depositors WHERE `depositor no.` = :id';
+		$prep = array(
+			':hours' => $hours,
+			':id' => $this->id
+		);
+		DB::execPrep($query, $prep);
 	}
 }
 
